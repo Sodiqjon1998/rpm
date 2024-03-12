@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Teacher\GroupItemsController;
 use App\Http\Controllers\Teacher\GroupsController;
 use App\Http\Controllers\Teacher\QuestionController;
+use App\Http\Controllers\Teacher\QuestionItemController;
 use App\Http\Controllers\Teacher\QuizController;
 use App\Http\Controllers\Teacher\SiteController;
 use App\Http\Controllers\Teacher\UserController;
@@ -71,5 +72,18 @@ Route::group(['middleware' => ['auth.teacher', 'verified', 'teacher']], function
         Route::delete('/teacher/question/{id}', 'destroy')->name('teacher.question.destroy');
 
         Route::get('/teacher/question/getData/{id}', 'getData')->name('teacher.question.getData');
+    });
+
+
+    Route::controller(QuestionItemController::class)->group(function () {
+        Route::get('/teacher/questionItems/index', 'index')->name('teacher.questionItems.index');
+        Route::get('/teacher/questionItems/create', 'create')->name('teacher.questionItems.create');
+        Route::get('/teacher/questionItems/{id}', 'show')->name('teacher.questionItems.show');
+        Route::get('/teacher/questionItems/{id}/edit', 'edit')->name('teacher.questionItems.edit');
+        Route::post('/teacher/questionItems/store', 'store')->name('teacher.questionItems.store');
+        Route::put('/teacher/questionItems/{id}', 'update')->name('teacher.questionItems.update');
+        Route::delete('/teacher/questionItems/{id}', 'destroy')->name('teacher.questionItems.destroy');
+
+        Route::get('/teacher/questionItems/getData/{id}', 'getData')->name('teacher.questionItems.getData');
     });
 });
