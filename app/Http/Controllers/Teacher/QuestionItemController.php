@@ -84,9 +84,30 @@ class QuestionItemController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request)
     {
-        //
+        $questionItemsId = $request->input('item_id');
+
+        $items = QuestionItem::where('id', '=', $questionItemsId)->first();
+
+        $items->question = $request->input('editQuestion');
+
+        if($items->save()){
+            foreach ($request->input('edit_answers') as $key => $item){
+
+                $is_correct = 0;
+                if($request->edit_is_correct == 1){
+                    $is_correct = 1;
+                }
+
+                Answer::where('id', $key)
+                    ->update([
+                        'item_id' => $questionItemsId,
+                        'answer' => $item,
+                        'is_correct' => $is_correct
+                    ]);
+            }
+        }
     }
 
     /**

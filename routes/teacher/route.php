@@ -81,7 +81,7 @@ Route::group(['middleware' => ['auth.teacher', 'verified', 'teacher']], function
         Route::get('/teacher/questionItems/{id}', 'show')->name('teacher.questionItems.show');
         Route::get('/teacher/questionItems/{id}/edit', 'edit')->name('teacher.questionItems.edit');
         Route::post('/teacher/questionItems/store', 'store')->name('teacher.questionItems.store');
-        Route::put('/teacher/questionItems/{id}', 'update')->name('teacher.questionItems.update');
+        Route::put('/teacher/questionItems', 'update')->name('teacher.questionItems.update');
         Route::delete('/teacher/questionItems/{id}', 'destroy')->name('teacher.questionItems.destroy');
 
         Route::get('/teacher/questionItems/getData/{id}', 'getData')->name('teacher.questionItems.getData');

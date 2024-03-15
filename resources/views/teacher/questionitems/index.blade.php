@@ -133,8 +133,8 @@
                 @csrf
                 <div class="modal-content">
                     <div class="modal-header d-flex justify-content-between">
-                        <h5 class="modal-title" id="staticBackdropLabel">Savol </h5>
-                        <button id="addAnswer" class="btn btn-primary btn-sm"><i class="fa fa-plus-circle"></i> Varyant
+                        <h5 class="modal-title editQuestion" id="staticBackdropLabel">Savol </h5>
+                        <button id="editAnswer" class="btn btn-primary btn-sm"><i class="fa fa-plus-circle"></i> Varyant
                             qo'shish
                         </button>
                         {{--                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>--}}
@@ -143,15 +143,16 @@
                         @csrf
                         <div class="row">
                             <div class="col">
-                                <input type="text" name="question" placeholder="Enter question" required id=""
+                                <input type="hidden" name="item_id" id="#itemId">
+                                <input type="text" name="editQuestion" placeholder="Enter question" required id=""
                                        class="w-100 form-control-sm question">
                             </div>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <div class="error text-danger text-left"></div>
+                        <div class="editError text-danger text-left"></div>
                         <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Yopish</button>
-                        <button type="submit" class="btn btn-primary btn-sm">Saqlash</button>
+                        <button type="submit" class="btn btn-primary btn-sm editSave">Saqlash</button>
                     </div>
                 </div>
             </form>
@@ -268,6 +269,8 @@
             });
 
 
+
+
             $(document).on('click', '.removeButton', function(e){
                 e.preventDefault();
 
@@ -314,43 +317,122 @@
 
             });
 
-            $(".editButton").click(function(e){
-                e.preventDefault();
 
-                let html = '';
+            // EDIT SHOW
+            $(".editButton").click(function(a){
+               let id = $(this).attr('data-id');
+               $("#itemId").val(id);
 
-                let id = $(this).attr('data-id');
+               let url = "{{route("teacher.questionItems.getData", 'id')}}";
 
-                let url = '{{route("teacher.questionItems.getData", "id")}}';
+               url = url.replace('id', id);
 
-                 url = url.replace('id', id);
-
-                $.ajax({
+               $.ajax({
                     url: url,
                     type: "GET",
                     success:function(data){
-                        console.log(data.data.questionItems.answers);
-                        if(data.success == true){
-                            $('.question').val(data.data.questionItems.question);
+                        let html = '';
+                        let editAnswersLength = data.data.questionItems.answers.length;
 
-                                let answersLength = data.data.questionItems.answers;
-                                for(let i = 0; i < answersLength; i++){
-                                    html = `
-                                     <div class="answers mt-2" style="display: flex; justify-content:space-around">
-                                         <input type="radio" name="is_correct" id="" class="is_correct mt-1" >
-                                        <div class="pt-2">
-                                            <input type="text" name="answers[]" value="` + answersLength.answer + `" placeholder="Enter answer" required id="" style="width: 370px" class="editAnswers">
-                                        </div>
-                                        <button class="btn btn-danger btn-sm mt-2 removeButton"><i class="fa fa-trash"></i></button>
-                                    </div>
-                                `;
-                                $('.editModalBody').append(html);
+                        $('.question').val(data.data.questionItems.question);
+                        $('.editAnswers').remove();
+
+                        for(let i = 0; i < editAnswersLength; i++){
+
+                            let checked = '';
+
+                            if(data.data.questionItems['answers'][i]['is_correct'] == 1){
+                                checked = "checked";
                             }
+
+                            html +=`
+                                <div class="editAnswers mt-2" style="display: flex; justify-content:space-around">
+                                     <input type="radio" name="edit_is_correct" id="" class="edit_is_correct mt-1" `+checked+`>
+                                    <div class="pt-2">
+                                        <input type="text" name="edit_answers[]" value="` + data.data.questionItems['answers'][i]['answer'] + `" placeholder="Enter answer" required id="" style="width: 370px">
+                                    </div>
+                                    <button class="btn btn-danger btn-sm mt-2 removeButton"><i class="fa fa-trash"></i></button>
+                                </div>
+                            `;
+                        }
+
+                        $('.editModalBody').append(html);
+                    }
+               });
+            });
+
+
+            $('#editQuestionItems').submit(function(e){
+                 e.preventDefault();
+
+                 if($('.editAnswers').length < 2){
+                     $('.editError').text("Eng kamida 2 ta varyant kiriting");
+                     setTimeout(function(){
+                         $('.editError').text("");
+                     }, 2000);
+                 }else{
+
+                    let checkIsCorrect = false;
+
+                    for(let i = 0; i <= $('.edit_is_correct').length; i++){
+                        if($('.edit_is_correct:eq('+ i +')').prop('checked') == true){
+                            checkIsCorrect = true;
+                            $('.edit_is_correct:eq('+ i +')').val($('.edit_is_correct:eq('+ i +')').next().find('input').val())
                         }
                     }
-                });
+
+                    if(checkIsCorrect && ($('.editAnswers').length >= 2)){
+                        let formData = $(this).serialize();
+
+
+                        $.ajax({
+                            url:"{{route('teacher.questionItems.update')}}",
+                            type:"PUT",
+                            data:formData,
+                            success:function(data){
+                                if(data.success == true){
+                                console.log(data);
+{{--                                    location.reload();--}}
+                                }else{
+                                    alert(data.msg);
+                                }
+                            }
+                        });
+                    }else{
+                        $('.editError').text("To'g'ri varyantni belgilanmagan yoki varyant kam");
+                         setTimeout(function(){
+                             $('.editError').text("");
+                         }, 2000);
+                    }
+                 }
             });
+
+
+            // EDIT ADD BUTTON
+             $('#editAnswer').click(function(){
+
+                if($('.editAnswers').length >= 6){
+                     $('.editError').text("Eng ko'pi bilan 6 ta varyant kirita olasiz!");
+                     setTimeout(function(){
+                         $('.editError').text("");
+                     }, 2000);
+                }else{
+                    let html = `
+                        <div class="editAnswers mt-2" style="display: flex; justify-content:space-around">
+                             <input type="radio" name="edit_is_correct" id="" class="edit_is_correct mt-1" >
+                            <div class="pt-2">
+                                <input type="text" name="edit_answers[]" placeholder="Enter answer" required id="" style="width: 370px">
+                            </div>
+                            <button class="btn btn-danger btn-sm mt-2 removeButton"><i class="fa fa-trash"></i></button>
+                        </div>
+                    `;
+
+                    $('.editModalBody').append(html);
+                }
+            });
+
         });
+
 
 
 
