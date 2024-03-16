@@ -64,7 +64,7 @@
                                                 <i class="fa fa-pen"></i>
                                             </a>
                                             <form id="deleteForm"
-                                                  action="{{ route('teacher.questionItems.destroy', $question->id) }}"
+                                                  action="{{ route('teacher.questionItems.destroyQuestion', $question->id) }}"
                                                   method="POST" style="display: inline">
                                                 @csrf
                                                 @method('DELETE')
@@ -351,7 +351,7 @@
                                     <div class="pt-2">
                                         <input type="text" name="edit_answers[]" value="` + data.data.questionItems['answers'][i]['answer'] + `" placeholder="Enter answer" required id="" style="width: 370px">
                                     </div>
-                                    <button class="btn btn-danger btn-sm mt-2 removeButton"><i class="fa fa-trash"></i></button>
+                                    <button class="btn btn-danger btn-sm mt-2 removeButton deleteButton" data-id="`+ data.data.questionItems['answers'][i]['id'] +`"><i class="fa fa-trash"></i></button>
                                 </div>
                             `;
                         }
@@ -359,6 +359,24 @@
                         $('.editModalBody').append(html);
                     }
                });
+            });
+
+            $(document).on('click', '.deleteButton', function(e){
+                e.preventDefault();
+                let aid = $(this).attr('data-id');
+
+                $.ajax({
+                    url: "{{route('teacher.questionItems.destroy')}}",
+                    type:"GET",
+                    data:{id:aid},
+                    success:function(data){
+                        if(data.success == true){
+                            location.reload();
+                        }else{
+                            alert(data.msg)
+                        }
+                    }
+                });
             });
 
 
@@ -432,17 +450,6 @@
             });
 
         });
-
-
-
-
-
-
-
-
-
-
-
 
     </script>
 @stop

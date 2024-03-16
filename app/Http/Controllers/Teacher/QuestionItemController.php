@@ -46,7 +46,7 @@ class QuestionItemController extends Controller
             foreach ($request->input('answers') as $item) {
                 $answer = new Answer();
                 $is_correct = 0;
-                if ($request->input('is_correct') == $item){
+                if ($request->input('is_correct') == $item) {
                     $is_correct = 1;
                 }
                 $answer->answer = $item;
@@ -92,12 +92,15 @@ class QuestionItemController extends Controller
 
         $items->question = $request->input('editQuestion');
 
-        if($items->save()){
-            foreach ($request->input('edit_answers') as $key => $item){
+        if ($items->save()) {
+            foreach ($request->input('edit_answers') as $key => $item) {
 
                 $is_correct = 0;
-                if($request->edit_is_correct == 1){
+
+                if ($request->edit_is_correct == 1) {
+
                     $is_correct = 1;
+
                 }
 
                 Answer::where('id', $key)
@@ -113,9 +116,14 @@ class QuestionItemController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(QuestionItem $questionItem)
+    public function destroy(Request $request)
     {
-        //
+        $answer = Answer::where('id', $request->id)->delete();
+
+        if ($answer) {
+            return response()->json(['success' => true, 'data' => "Ma'lumot o'chirildi"]);
+        }
+        return response()->json(['success' => true, 'data' => "Ma'lumot o'chirilmadi"]);
     }
 
     public function getData($id)
@@ -129,10 +137,17 @@ class QuestionItemController extends Controller
             $data = [
                 'questionItems' => $questionItems,
             ];
+
             return response()->json(['success' => true, 'data' => $data]);
         }
 
-
         return response()->json(['success' => false, 'data' => "Id mavjud emas !"]);
+    }
+
+    public function destroyQuestion(string $id)
+    {
+        QuestionItem::where('id', $id)->delete();
+
+        return redirect()->route('teacher.questionItems.index');
     }
 }
