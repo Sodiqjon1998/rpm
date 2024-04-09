@@ -1,191 +1,99 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 
 <head>
 
-    <!-- META ============================================= -->
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="keywords" content="" />
-    <meta name="author" content="" />
-    <meta name="robots" content="" />
+    <meta charset="utf-8"/>
+    <title>Dark Sidebar | Upcube - Admin & Dashboard Template</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="Premium Multipurpose Admin & Dashboard Template" name="description"/>
+    <meta content="Themesdesign" name="author"/>
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="assets/images/favicon.ico">
 
-    <!-- DESCRIPTION -->
-    <meta name="description" content="EduChamp : Education HTML Template" />
+    <link href="{{asset('assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css')}}" rel="stylesheet"
+          type="text/css"/>
+    <link href="{{asset('assets/libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css')}}" rel="stylesheet"
+          type="text/css"/>
+    <link href="{{asset('assets/libs/datatables.net-select-bs4/css//select.bootstrap4.min.css')}}" rel="stylesheet"
+          type="text/css"/>
 
-    <!-- OG -->
-    <meta property="og:title" content="EduChamp : Education HTML Template" />
-    <meta property="og:description" content="EduChamp : Education HTML Template" />
-    <meta property="og:image" content="" />
-    <meta name="format-detection" content="telephone=no">
+    <!-- jquery.vectormap css -->
+    <link href="{{ asset('assets/libs/admin-resources/jquery.vectormap/jquery-jvectormap-1.2.2.css') }}"
+          rel="stylesheet" type="text/css"/>
 
-    <!-- FAVICONS ICON ============================================= -->
-    <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon" />
-    <link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon.png" />
+    <!-- DataTables -->
+    <link href="{{ asset('assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css') }}" rel="stylesheet"
+          type="text/css"/>
 
-    <!-- PAGE TITLE HERE ============================================= -->
-    <title>EduChamp : Education HTML Template </title>
+    <!-- Responsive datatable examples -->
+    <link href="{{ asset('assets/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css') }}"
+          rel="stylesheet" type="text/css"/>
 
-    <!-- MOBILE SPECIFIC ============================================= -->
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap Css -->
+    <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css"/>
+    <!-- Icons Css -->
+    <link href="{{ asset('assets/css/icons.min.css') }}" rel="stylesheet" type="text/css"/>
+    <!-- App Css-->
+    <link href="{{ asset('assets/css/app.min.css') }}" rel="stylesheet" type="text/css"/>
 
-    <!-- All PLUGINS CSS ============================================= -->
-    <link rel="stylesheet" type="text/css" href="{{ asset('f/assets/css/assets.css') }}">
+    <!-- Plugins css -->
+    <link href="{{ asset('assets/libs/dropzone/min/dropzone.min.css') }}" rel="stylesheet" type="text/css"/>
 
-    <!-- TYPOGRAPHY ============================================= -->
-    <link rel="stylesheet" type="text/css" href="{{ asset('f/assets/css/typography.css') }}">
-
-    <!-- SHORTCODES ============================================= -->
-    <link rel="stylesheet" type="text/css" href="{{ asset('f/assets/css/shortcodes/shortcodes.css') }}">
-
-    <!-- STYLESHEETS ============================================= -->
-    <link rel="stylesheet" type="text/css" href="{{ asset('f/assets/css/style.css') }}">
-    <link class="skin" rel="stylesheet" type="text/css" href="{{ asset('f/assets/css/color/color-1.css') }}">
-
-    <!-- REVOLUTION SLIDER CSS ============================================= -->
-    <link rel="stylesheet" type="text/css" href="{{ asset('f/assets/vendors/revolution/css/layers.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('f/assets/vendors/revolution/css/settings.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('f/assets/vendors/revolution/css/navigation.css') }}">
-    <!-- REVOLUTION SLIDER END -->
     @yield('css')
+
 </head>
 
-<body id="bg">
-    <div class="page-wraper">
-        {{-- <div id="loading-icon-bx"></div> --}}
-        <!-- Header Top ==== -->
-        @include('frontend.layouts.partials._header')
-        <!-- Header Top END ==== -->
+<body>
 
-        <!-- Content -->
-        <div class="page-content bg-white">
-            @yield('content')
-        </div>
-        <!-- Content END-->
+<div style="display: flex; justify-content: center; align-items: center; height: 100vh;">
+    @yield('content')
+</div>
 
-        <!-- Footer ==== -->
-        @include('frontend.layouts.partials._footer')
-        <!-- Footer END ==== -->
-        <button class="back-to-top fa fa-chevron-up"></button>
-    </div>
 
-    <!-- External JavaScripts -->
-    <script src="{{ asset('f/assets/js/jquery.min.js') }}"></script>
-    <script src="{{ asset('f/assets/vendors/bootstrap/js/popper.min.js') }}"></script>
-    <script src="{{ asset('f/assets/vendors/bootstrap/js/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('f/assets/vendors/bootstrap-select/bootstrap-select.min.js') }}"></script>
-    <script src="{{ asset('f/assets/vendors/bootstrap-touchspin/jquery.bootstrap-touchspin.js') }}"></script>
-    <script src="{{ asset('f/assets/vendors/magnific-popup/magnific-popup.js') }}"></script>
-    <script src="{{ asset('f/assets/vendors/counter/waypoints-min.js') }}"></script>
-    <script src="{{ asset('f/assets/vendors/counter/counterup.min.js') }}"></script>
-    <script src="{{ asset('f/assets/vendors/imagesloaded/imagesloaded.js') }}"></script>
-    <script src="{{ asset('f/assets/vendors/masonry/masonry.js') }}"></script>
-    <script src="{{ asset('f/assets/vendors/masonry/filter.js') }}"></script>
-    <script src="{{ asset('f/assets/vendors/owl-carousel/owl.carousel.js') }}"></script>
-    <script src="{{ asset('f/assets/js/functions.js') }}"></script>
-    <script src="{{ asset('f/assets/js/contact.js') }}"></script>
-    <script src='{{ asset('f/assets/vendors/switcher/switcher.js') }}'></script>
-    <!-- Revolution JavaScripts Files -->
-    <script src="{{ asset('f/assets/vendors/revolution/js/jquery.themepunch.tools.min.js') }}"></script>
-    <script src="{{ asset('f/assets/vendors/revolution/js/jquery.themepunch.revolution.min.js') }}"></script>
-    <!-- Slider revolution 5.0 Extensions  (Load Extensions only on Local File Systems !  The following part can be removed on Server for On Demand Loading) -->
-    <script src="{{ asset('f/assets/vendors/revolution/js/extensions/revolution.extension.actions.min.js') }}"></script>
-    <script src="{{ asset('f/assets/vendors/revolution/js/extensions/revolution.extension.carousel.min.js') }}"></script>
-    <script src="{{ asset('f/assets/vendors/revolution/js/extensions/revolution.extension.kenburn.min.js') }}"></script>
-    <script src="{{ asset('f/assets/vendors/revolution/js/extensions/revolution.extension.layeranimation.min.js') }}">
-    </script>
-    <script src="{{ asset('f/assets/vendors/revolution/js/extensions/revolution.extension.migration.min.js') }}"></script>
-    <script src="{{ asset('f/assets/vendors/revolution/js/extensions/revolution.extension.navigation.min.js') }}"></script>
-    <script src="{{ asset('f/assets/vendors/revolution/js/extensions/revolution.extension.parallax.min.js') }}"></script>
-    <script src="{{ asset('f/assets/vendors/revolution/js/extensions/revolution.extension.slideanims.min.js') }}"></script>
-    <script src="{{ asset('f/assets/vendors/revolution/js/extensions/revolution.extension.video.min.js') }}"></script>
-    <script>
-        jQuery(document).ready(function() {
-            var ttrevapi;
-            var tpj = jQuery;
-            if (tpj("#rev_slider_486_1").revolution == undefined) {
-                revslider_showDoubleJqueryError("#rev_slider_486_1");
-            } else {
-                ttrevapi = tpj("#rev_slider_486_1").show().revolution({
-                    sliderType: "standard",
-                    jsFileLocation: "assets/vendors/revolution/js/",
-                    sliderLayout: "fullwidth",
-                    dottedOverlay: "none",
-                    delay: 9000,
-                    navigation: {
-                        keyboardNavigation: "on",
-                        keyboard_direction: "horizontal",
-                        mouseScrollNavigation: "off",
-                        mouseScrollReverse: "default",
-                        onHoverStop: "on",
-                        touch: {
-                            touchenabled: "on",
-                            swipe_threshold: 75,
-                            swipe_min_touches: 1,
-                            swipe_direction: "horizontal",
-                            drag_block_vertical: false
-                        },
-                        arrows: {
-                            style: "uranus",
-                            enable: true,
-                            hide_onmobile: false,
-                            hide_onleave: false,
-                            tmp: '',
-                            left: {
-                                h_align: "left",
-                                v_align: "center",
-                                h_offset: 10,
-                                v_offset: 0
-                            },
-                            right: {
-                                h_align: "right",
-                                v_align: "center",
-                                h_offset: 10,
-                                v_offset: 0
-                            }
-                        },
+<!-- JAVASCRIPT -->
+<script src="{{ asset('assets/libs/jquery/jquery.min.js') }}"></script>
+<script src="{{ asset('assets/libs/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+<script src="{{ asset('assets/libs/metismenu/metisMenu.min.js') }}"></script>
+<script src="{{ asset('assets/libs/simplebar/simplebar.min.js') }}"></script>
+<script src="{{ asset('assets/libs/node-waves/waves.min.js') }}"></script>
 
-                    },
-                    viewPort: {
-                        enable: true,
-                        outof: "pause",
-                        visible_area: "80%",
-                        presize: false
-                    },
-                    responsiveLevels: [1240, 1024, 778, 480],
-                    visibilityLevels: [1240, 1024, 778, 480],
-                    gridwidth: [1240, 1024, 778, 480],
-                    gridheight: [768, 600, 600, 600],
-                    lazyType: "none",
-                    parallax: {
-                        type: "scroll",
-                        origo: "enterpoint",
-                        speed: 400,
-                        levels: [5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 46, 47, 48, 49, 50, 55],
-                        type: "scroll",
-                    },
-                    shadow: 0,
-                    spinner: "off",
-                    stopLoop: "off",
-                    stopAfterLoops: -1,
-                    stopAtSlide: -1,
-                    shuffle: "off",
-                    autoHeight: "off",
-                    hideThumbsOnMobile: "off",
-                    hideSliderAtLimit: 0,
-                    hideCaptionAtLimit: 0,
-                    hideAllCaptionAtLilmit: 0,
-                    debugMode: false,
-                    fallbacks: {
-                        simplifyAll: "off",
-                        nextSlideOnWindowFocus: "off",
-                        disableFocusListener: false,
-                    }
-                });
-            }
-        });
-    </script>
-    @yield('js')
+
+<!-- apexcharts -->
+{{-- <script src="{{asset('assets/libs/apexcharts/apexcharts.min.js')}}"></script> --}}
+
+<!-- jquery.vectormap map -->
+<script src="{{ asset('assets/libs/admin-resources/jquery.vectormap/jquery-jvectormap-1.2.2.min.js') }}"></script>
+<script src="{{ asset('assets/libs/admin-resources/jquery.vectormap/maps/jquery-jvectormap-us-merc-en.js') }}">
+</script>
+
+<!-- Required datatable js -->
+<script src="{{ asset('assets/libs/datatables.net/js/jquery.dataTables.min.js') }}"></script>
+<script src="{{ asset('assets/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
+<script src="{{asset('assets/libs/jszip/jszip.min.js')}}"></script>
+<script src="{{asset('assets/libs/pdfmake/build/pdfmake.min.js')}}"></script>
+<script src="{{asset('assets/libs/pdfmake/build/vfs_fonts.js')}}"></script>
+<script src="{{asset('assets/libs/datatables.net-buttons/js/buttons.html5.min.js')}}"></script>
+<script src="{{asset('assets/libs/datatables.net-buttons/js/buttons.print.min.js')}}"></script>
+<script src="{{asset('assets/libs/datatables.net-buttons/js/buttons.colVis.min.js')}}"></script>
+
+<!-- Responsive examples -->
+<script src="{{ asset('assets/libs/datatables.net-responsive/js/dataTables.responsive.min.js') }}"></script>
+<script src="{{ asset('assets/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js') }}"></script>
+
+{{-- <script src="{{asset('assets/js/pages/dashboard.init.js')}}"></script> --}}
+
+<script src="{{ asset('assets/js/pages/form-editor.init.js') }}"></script>
+
+<script src="{{ asset('assets/libs/tinymce/tinymce.min.js') }}"></script>
+
+<!-- Plugins js -->
+<script src="{{ asset('assets/libs/dropzone/min/dropzone.min.js') }}"></script>
+
+<!-- App js -->
+<script src="{{ asset('assets/js/app.js') }}"></script>
+
+@yield('js')
 </body>
 
 </html>
