@@ -14,11 +14,7 @@ Route::group(['middleware' => ['auth.teacher', 'verified', 'teacher']], function
 
     Route::get('/teacher', [SiteController::class, 'index'])->name('teacher');
 
-
-    // Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    // Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    // Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-    Route::controller(UserController::class)->group(function () {
+    Route::prefix('teacher')->controller(UserController::class)->group(function () {
         Route::get('/teacher/user/index', 'index')->name('teacher.user.index');
         Route::get('/teacher/user/create', 'create')->name('teacher.user.create');
         Route::get('/teacher/user/{id}', 'show')->name('teacher.user.show');
@@ -28,7 +24,7 @@ Route::group(['middleware' => ['auth.teacher', 'verified', 'teacher']], function
         Route::delete('/teacher/user/{id}', 'destroy')->name('teacher.user.destroy');
     });
 
-    Route::controller(GroupsController::class)->group(function () {
+    Route::prefix('teacher')->controller(GroupsController::class)->group(function () {
         Route::get('/teacher/groups/index', 'index')->name('teacher.groups.index');
         Route::get('/teacher/groups/create', 'create')->name('teacher.groups.create');
         Route::get('/teacher/groups/{id}', 'show')->name('teacher.groups.show');
@@ -41,7 +37,7 @@ Route::group(['middleware' => ['auth.teacher', 'verified', 'teacher']], function
         Route::get('/teacher/groups/{id}/removeStudent', 'removeStudent')->name('teacher.groups.removeStudent');
     });
 
-    Route::controller(GroupItemsController::class)->group(function () {
+    Route::prefix('teacher')->controller(GroupItemsController::class)->group(function () {
         Route::get('/teacher/groupitems/index', 'index')->name('teacher.groupitems.index');
         Route::get('/teacher/groupitems/create', 'create')->name('teacher.groupitems.create');
         Route::get('/teacher/groupitems/{id}', 'show')->name('teacher.groupitems.show');
@@ -52,7 +48,7 @@ Route::group(['middleware' => ['auth.teacher', 'verified', 'teacher']], function
     });
 
 
-    Route::controller(QuizController::class)->group(function () {
+    Route::prefix('teacher')->controller(QuizController::class)->group(function () {
         Route::get('/teacher/quiz/index', 'index')->name('teacher.quiz.index');
         Route::get('/teacher/quiz/create', 'create')->name('teacher.quiz.create');
         Route::get('/teacher/quiz/{id}', 'show')->name('teacher.quiz.show');
@@ -62,7 +58,7 @@ Route::group(['middleware' => ['auth.teacher', 'verified', 'teacher']], function
         Route::delete('/teacher/quiz/{id}', 'destroy')->name('teacher.quiz.destroy');
     });
 
-    Route::controller(QuestionController::class)->group(function () {
+    Route::prefix('teacher')->controller(QuestionController::class)->group(function () {
         Route::get('/teacher/question/index/{id}', 'index')->name('teacher.question.index');
         Route::get('/teacher/question/create', 'create')->name('teacher.question.create');
         Route::get('/teacher/question/{id}', 'show')->name('teacher.question.show');
@@ -75,7 +71,7 @@ Route::group(['middleware' => ['auth.teacher', 'verified', 'teacher']], function
     });
 
 
-    Route::controller(QuestionItemController::class)->group(function () {
+    Route::prefix('teacher')->controller(QuestionItemController::class)->group(function () {
         Route::get('/teacher/questionItems/index', 'index')->name('teacher.questionItems.index');
         Route::get('/teacher/questionItems/create', 'create')->name('teacher.questionItems.create');
         Route::get('/teacher/questionItems/{id}', 'show')->name('teacher.questionItems.show');

@@ -1,24 +1,28 @@
 @extends('frontend.layouts.main')
 
+
 @section('content')
 
-    <div class="card" style="width: 80%">
-        <div class="card-header text-center">
-            Yuksalish CRM <i class="fa fa-puzzle-piece"></i> <i class='fa fa-spin fa-cog mr-2'></i>(in progress)
+    <nav class=" navbar-expand-lg navbar-dark" style="border-radius: 7px; width: 40%; background: #3da2f6;">
+        <h5 class="display-6 text-center"> <i class="fa fa-cog fa-spin pb-3" style="font-size:24px"></i> Yuksalish maktabiplatformasi</h5>
+        <div class="container-fluid">
+            <button class="navbar-toggler btn-lg" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup" style="display: flex; justify-content: space-around; font-size: 22px;">
+                <div class="navbar-nav">
+                    <a class="nav-link active" aria-current="page" href="{{route("dashboard")}}">
+                        <i class="fa fa-user-graduate"></i> Super admin
+                    </a>
+                    <a class="nav-link" href="{{route("teacher")}}">
+                        <i class="fa fa-chalkboard-teacher"></i> O'qituvchi
+                    </a>
+                    <a class="nav-link" href="#">
+                        <i class="fa fa-child"></i> O'quvchi
+                    </a>
+                </div>
+            </div>
         </div>
-        <div class="card-body bg-success">
-            <ul style="list-style: none; display: flex; -webkit-justify-content: space-around">
-                <li>
-                    <a href="{{route("dashboard")}}" class="btn btn-info"><i class="fa fa-user-secret"></i> Super admin </a>
-                </li>
-                <li>
-                    <a href="{{route("teacher")}}" class="btn btn-primary"><i class="fa fa-chalkboard-teacher"></i> Teacher </a>
-                </li>
-                <li>
-                    <a href="" class="btn btn-primary"><i class="fa fa-user-friends"></i> Pupils </a>
-                </li>
-            </ul>
-        </div>
-    </div>
+    </nav>
 
 @endsection

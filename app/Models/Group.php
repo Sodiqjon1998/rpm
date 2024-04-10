@@ -21,6 +21,12 @@ class Group extends Model
         return $teacher->name;
     }
 
+    public static function getGroup($id)
+    {
+        $group = self::find($id);
+        return $group->name;
+    }
+
     public static function getAllStudents($group)
     {
         $items = DB::table('group_item')
@@ -38,15 +44,37 @@ class Group extends Model
     public static function getStudent($id)
     {
         return DB::table('users')
-        ->where('id', '=', $id)
-        ->first();
+            ->where('id', '=', $id)
+            ->first();
+    }
+
+    public static function getPupils($id)
+    {
+        $count = DB::table('group_item')
+            ->where('group_id', '=', $id)
+            ->where('finished_at', '=', null)
+            ->count();
+
+        return $count;
+    }
+
+
+    public static function getPupilsFinishedCount($id)
+    {
+        $count = DB::table('group_item')
+            ->where('group_id', '=', $id)
+            ->where('finished_at', '!=', null)
+            ->count();
+
+        return $count;
     }
 
     /**
      * @return void
      * All courses
      */
-    public static function getAllCourses(){
+    public static function getAllCourses()
+    {
         return Course::where('status', '=', 1)->get();
     }
 
@@ -55,4 +83,5 @@ class Group extends Model
     {
         return $this->belongsTo(Course::class);
     }
+
 }

@@ -30,7 +30,7 @@
                 <li>
                     <a href="{{route('backend.user.index')}}" class=" waves-effect">
                         <i class="ri-user-2-fill"></i>
-                        <span>Foydalanuvchilar</span>
+                        <span>O'qituvchilar</span>
                     </a>
                 </li>
 

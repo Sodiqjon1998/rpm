@@ -40,6 +40,9 @@
     <!-- Plugins css -->
     <link href="{{ asset('assets/libs/dropzone/min/dropzone.min.css') }}" rel="stylesheet" type="text/css"/>
 
+    <!-- Tabs-->
+    <link href="{{ asset('assets/css/crm.css') }}" rel="stylesheet" type="text/css"/>
+
     @yield('css')
 
 </head>

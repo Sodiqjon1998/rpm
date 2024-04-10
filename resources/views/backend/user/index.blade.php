@@ -54,7 +54,11 @@ $i = 1;
                                         <td><?= $user->email ?></td>
                                         <td>{{ \App\Models\Backend\User::getTypes($user->user_type) }}</td>
                                         <td>{{ $user->created_at ?? '--' }}</td>
-                                        <td style="width: 140px;">
+                                        <td style="width: 160px;">
+                                            <a href="{{ route('backend.user.groups', $user->id) }}"
+                                               class="btn btn-outline-info btn-sm" title="Sinflar">
+                                                <i class="fa fa-object-group"></i>
+                                            </a>
                                             <a href="{{ route('backend.user.show', $user->id) }}"
                                                 class="btn btn-success btn-sm">
                                                 <i class="fa fa-eye"></i>

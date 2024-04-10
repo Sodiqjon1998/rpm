@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Backend\User;
+use App\Models\Group;
+use App\Models\GroupItem;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -128,5 +130,42 @@ class UserController extends Controller
         }
 
         return redirect()->back()->with(['success' => 'Rasmni o\'chirishda muammo']);
+    }
+
+
+    public function groups(string $id)
+    {
+        $teacher = User::findOrFail($id);
+
+        $groups = Group::with('course')->where('teacher_id', '=', $teacher->id)->get();
+
+        return view('backend.groups.groups', [
+            'groups' => $groups,
+            'teacher_id' => $id
+        ]);
+    }
+
+    public function pupils(string $id)
+    {
+        $groupItems = GroupItem::where('group_id', '=', $id)
+            ->where('finished_at', '=', null)
+            ->get();
+
+        return view('backend.groups.pupils', [
+            'groupItems' => $groupItems,
+            'group_id' => $id
+        ]);
+    }
+
+
+    public function finished(string $id){
+        $groupItems = GroupItem::where('group_id', '=', $id)
+            ->where('finished_at', '!=', null)
+            ->get();
+
+        return view('backend.groups.pupils', [
+            'groupItems' => $groupItems,
+            'group_id' => $id
+        ]);
     }
 }

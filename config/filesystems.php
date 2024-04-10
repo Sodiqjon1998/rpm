@@ -56,16 +56,6 @@ return [
             'throw' => false,
         ],
 
-        'slider' => [
-            'driver' => 'local',
-            'root'   => public_path() . '/'
-        ],
-
-        'event' => [
-            'driver' => 'local',
-            'root'   => public_path() . '/'
-        ],
-
         'user' => [
             'driver' => 'local',
             'root'   => public_path() . '/'
