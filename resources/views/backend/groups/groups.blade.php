@@ -14,7 +14,7 @@
                 </h4>
                 <h1 class="display-6">
                     <a href="{{route('backend.user.show', $teacher_id)}}" class="btn btn-success">
-                        <strong>O'qituvchi:👨‍⚖️</strong> {{Group::getTeacher($teacher_id)}}
+                        <strong>O'qituvchi:👨‍⚖️</strong> {{Group::getTeacher($teacher_id)->name}}
                     </a>
                 </h1>
 

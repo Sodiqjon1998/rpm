@@ -61,7 +61,7 @@ use Illuminate\Support\Facades\DB;
                                     O'qituvchi
                                 </th>
                                 <td>
-                                    <?= Group::getTeacher($group->teacher_id) ?>
+                                    <?= Group::getTeacher($group->teacher_id)->name ?>
                                     </th>
                             </tr>
                             <tr>

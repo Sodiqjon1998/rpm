@@ -18,7 +18,7 @@ class Group extends Model
     public static function getTeacher($id)
     {
         $teacher = User::find($id);
-        return $teacher->name;
+        return $teacher;
     }
 
     public static function getGroup($id)
