@@ -143,7 +143,7 @@
                         @csrf
                         <div class="row">
                             <div class="col">
-                                <input type="hidden" name="item_id" id="#itemId">
+                                <input type="hidden" name="item_id" id="itemId">
                                 <input type="text" name="editQuestion" placeholder="Enter question" required id=""
                                        class="w-100 form-control-sm question">
                             </div>
@@ -321,7 +321,8 @@
             // EDIT SHOW
             $(".editButton").click(function(a){
                let id = $(this).attr('data-id');
-               $("#itemId").val(id);
+               let value = document.getElementById("itemId").value = id
+
 
                let url = "{{route("teacher.questionItems.getData", 'id')}}";
 
@@ -371,7 +372,7 @@
                     data:{id:aid},
                     success:function(data){
                         if(data.success == true){
-                            location.reload();
+{{--                            location.reload();--}}
                         }else{
                             alert(data.msg)
                         }
@@ -400,6 +401,7 @@
                     }
 
                     if(checkIsCorrect && ($('.editAnswers').length >= 2)){
+                        let id = $(this).attr('data-id');
                         let formData = $(this).serialize();
 
 

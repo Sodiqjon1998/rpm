@@ -7,6 +7,7 @@ use App\Models\Answer;
 use App\Models\QuestionItem;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Mockery\Exception;
 
 class QuestionItemController extends Controller
 {
@@ -86,30 +87,61 @@ class QuestionItemController extends Controller
      */
     public function update(Request $request)
     {
-        $questionItemsId = $request->input('item_id');
+        try {
+            $questionItemsId = $request->input('item_id');
 
-        $items = QuestionItem::where('id', '=', $questionItemsId)->first();
+            QuestionItem::where('id', '=', $questionItemsId)->update([
+                'question' => $request->input('editQuestion')
+            ]);
 
-        $items->question = $request->input('editQuestion');
+            if (isset($request->answers)) {
+                foreach ($request->answers as $key => $item) {
 
-        if ($items->save()) {
-            foreach ($request->input('edit_answers') as $key => $item) {
+                    $is_correct = 0;
 
-                $is_correct = 0;
+                    if ($request->is_correct == 1) {
 
-                if ($request->edit_is_correct == 1) {
+                        $is_correct = 1;
 
-                    $is_correct = 1;
+                    }
 
-                }
-
-                Answer::where('id', $key)
-                    ->update([
+                    Answer::where('id', $key)->update([
                         'item_id' => $questionItemsId,
                         'answer' => $item,
-                        'is_correct' => $is_correct
+                        'is_correct' => $is_correct,
+                        'created_by' => Auth::user()->id,
+                        'updated_by' => Auth::user()->id,
                     ]);
+                }
+
             }
+
+
+            if (isset($request->edit_answers)) {
+                foreach ($request->edit_answers as $item) {
+
+                    $is_correct = 0;
+
+                    if ($request->edit_is_correct == 1) {
+
+                        $is_correct = 1;
+
+                    }
+
+                    Answer::insert([
+                        'item_id' => $questionItemsId,
+                        'answer' => $item,
+                        'is_correct' => $is_correct,
+                        'created_by' => Auth::user()->id,
+                        'updated_by' => Auth::user()->id,
+                    ]);
+                }
+
+            }
+
+            return response()->json(['success' => true, 'msg' => "Ma'lumotlar tahrirlandi!"]);
+        }catch (\Exception $e){
+            return response()->json(['success' => false, 'msg' => $e->getMessage()]);
         }
     }
 
