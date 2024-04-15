@@ -19,11 +19,16 @@
     <div class="row" style="padding: 0; margin:0;">
         <div class="col-lg-12" style="padding: 0; margin:0;">
             <div class="card">
-                <h4 class="card-header">
+                <h4 class="card-header bg-opacity-1">
                     <a href="{{ route('teacher.questionItems.create') }}" class="btn btn-success btn-sm"
                        data-bs-toggle="modal"
                        data-bs-target="#addQuestionItemsModal">
                         <i class="fa fa-plus-circle"></i>
+                    </a>
+                    <a href="{{ route('teacher.questionItems.create') }}" class="btn btn-outline-info btn-sm float-end"
+                       data-bs-toggle="modal"
+                       data-bs-target="#importQuestionItemsModal">
+                        <i class="fa fa-file-pdf"></i> <i class="fa fa-download"></i>
                     </a>
                 </h4>
                 <div class="card-body">
@@ -153,6 +158,36 @@
                         <div class="editError text-danger text-left"></div>
                         <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Yopish</button>
                         <button type="submit" class="btn btn-primary btn-sm editSave">Saqlash</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!--EDIT Modal -->
+    <div class="modal fade" id="importQuestionItemsModal" data-bs-backdrop="static" data-bs-keyboard="false"
+         tabindex="-1"
+         aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <form id="importQuestionItems" enctype="multipart/form-data">
+                @csrf
+                <div class="modal-content">
+                    <div class="modal-header d-flex justify-content-between">
+                        <h5 class="modal-title importQuestion" id="staticBackdropLabel">Import </h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body importModalBody">
+                        @csrf
+                        <div class="row">
+                            <div class="col">
+                                <input type="file" name="file" class="form-control" id="fileupload" required >
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="importError text-danger text-left"></div>
+                        <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Yopish</button>
+                        <button type="submit" class="btn btn-primary btn-sm importSave">Import</button>
                     </div>
                 </div>
             </form>
@@ -350,7 +385,7 @@
                                 <div class="editAnswers mt-2" style="display: flex; justify-content:space-around">
                                      <input type="radio" name="edit_is_correct" id="" class="edit_is_correct mt-1" `+checked+`>
                                     <div class="pt-2">
-                                        <input type="text" name="edit_answers[]" value="` + data.data.questionItems['answers'][i]['answer'] + `" placeholder="Enter answer" required id="" style="width: 370px">
+                                        <input type="text" name="answers[]" value="` + data.data.questionItems['answers'][i]['answer'] + `" placeholder="Enter answer" required id="" style="width: 370px">
                                     </div>
                                     <button class="btn btn-danger btn-sm mt-2 removeButton deleteButton" data-id="`+ data.data.questionItems['answers'][i]['id'] +`"><i class="fa fa-trash"></i></button>
                                 </div>
@@ -372,7 +407,7 @@
                     data:{id:aid},
                     success:function(data){
                         if(data.success == true){
-{{--                            location.reload();--}}
+{{--                           location.reload();--}}
                         }else{
                             alert(data.msg)
                         }
@@ -382,7 +417,7 @@
 
 
             $('#editQuestionItems').submit(function(e){
-                 e.preventDefault();
+             e.preventDefault();
 
                  if($('.editAnswers').length < 2){
                      $('.editError').text("Eng kamida 2 ta varyant kiriting");
@@ -412,7 +447,7 @@
                             success:function(data){
                                 if(data.success == true){
                                 console.log(data);
-{{--                                    location.reload();--}}
+                                    location.reload();
                                 }else{
                                     alert(data.msg);
                                 }
@@ -451,7 +486,41 @@
                 }
             });
 
+
+            {{--  Import  --}}
+            $('#importQuestionItems').submit(function(e){
+                e.preventDefault();
+                let formData = new FormData();
+
+                formData.append("file", fileupload.files[0]);
+
+                $.ajax({
+                    headers:{
+                        "X-CSRF-TOKEN":"{{csrf_token()}}"
+                    }
+                });
+
+                $.ajax({
+                    url:"{{route('teacher.questionItems.import')}}",
+                    type:"POST",
+                    data:formData,
+                    processData:false,
+                    contentType: false,
+                    success:function(data){
+                    console.log(data)
+                        if(data.success == true){
+{{--                        console.log(data);--}}
+{{--                            location.reload();--}}
+                        }else{
+{{--                            alert(data.msg);--}}
+                        }
+                    }
+                });
+
+            });
+
         });
+
 
     </script>
 @stop

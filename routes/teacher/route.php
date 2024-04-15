@@ -82,5 +82,6 @@ Route::group(['middleware' => ['auth.teacher', 'verified', 'teacher']], function
         Route::get('/teacher/questionItems', 'destroy')->name('teacher.questionItems.destroy');
 
         Route::get('/teacher/questionItems/getData/{id}', 'getData')->name('teacher.questionItems.getData');
+        Route::post('/teacher/questionItems/import', 'import')->name('teacher.questionItems.import');
     });
 });

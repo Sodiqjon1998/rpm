@@ -3,11 +3,12 @@
 namespace App\Http\Controllers\Teacher;
 
 use App\Http\Controllers\Controller;
+use App\Imports\QnaImport;
 use App\Models\Answer;
 use App\Models\QuestionItem;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Mockery\Exception;
+use Maatwebsite\Excel\Facades\Excel;
 
 class QuestionItemController extends Controller
 {
@@ -99,7 +100,7 @@ class QuestionItemController extends Controller
 
                     $is_correct = 0;
 
-                    if ($request->is_correct == 1) {
+                    if ($request->is_correct == $item) {
 
                         $is_correct = 1;
 
@@ -118,7 +119,7 @@ class QuestionItemController extends Controller
 
 
             if (isset($request->edit_answers)) {
-                foreach ($request->edit_answers as $item) {
+                foreach ($request->edit_answers as $value) {
 
                     $is_correct = 0;
 
@@ -130,7 +131,7 @@ class QuestionItemController extends Controller
 
                     Answer::insert([
                         'item_id' => $questionItemsId,
-                        'answer' => $item,
+                        'answer' => $value,
                         'is_correct' => $is_correct,
                         'created_by' => Auth::user()->id,
                         'updated_by' => Auth::user()->id,
@@ -181,5 +182,14 @@ class QuestionItemController extends Controller
         QuestionItem::where('id', $id)->delete();
 
         return redirect()->route('teacher.questionItems.index');
+    }
+
+    public function import(Request $request){
+        try {
+            Excel::import(new QnaImport(), $request->file('file'));
+            return  response()->json(['success' => true, 'msg' => "Import Q & I successfully!"]);
+        }catch (\Exception $e){
+            return response()->json(['success' => false, 'msg' => $e->getMessage()]);
+        }
     }
 }
