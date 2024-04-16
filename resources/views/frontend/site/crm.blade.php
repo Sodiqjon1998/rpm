@@ -17,7 +17,7 @@
                     <a class="nav-link" href="{{route("teacher")}}">
                         <i class="fa fa-chalkboard-teacher"></i> O'qituvchi
                     </a>
-                    <a class="nav-link" href="#">
+                    <a class="nav-link" href="{{route("student")}}">
                         <i class="fa fa-child"></i> O'quvchi
                     </a>
                 </div>

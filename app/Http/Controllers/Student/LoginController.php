@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Teacher;
+namespace App\Http\Controllers\Student;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
@@ -28,7 +28,7 @@ class LoginController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect('/teacher');
+        return redirect('/student');
     }
 
     /**

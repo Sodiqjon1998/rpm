@@ -1,22 +1,23 @@
 <?php
 
-namespace App\Http\Controllers\Teacher;
+namespace App\Http\Controllers\Student;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
+use App\Providers\RouteServiceProvider;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 
-class LoginController extends Controller
+class AuthenticatedSessionController extends Controller
 {
     /**
      * Display the login view.
      */
     public function create(): View
     {
-        return view('teacher.layouts.login');
+        return view('auth.login');
     }
 
     /**
@@ -28,7 +29,7 @@ class LoginController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect('/teacher');
+        return redirect()->intended(RouteServiceProvider::TEACHER);
     }
 
     /**
