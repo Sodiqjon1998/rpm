@@ -15,6 +15,7 @@ Route::middleware(['auth', 'verified', 'admin'])->group(function () {
 
     Route::prefix('/dashboard')->controller(UserController::class)->group(function () {
         Route::get('/backend/user/index', 'index')->name('backend.user.index');
+        Route::get('/backend/user/students', 'students')->name('backend.user.students');
         Route::get('/backend/user/create', 'create')->name('backend.user.create');
         Route::get('/backend/user/{id}', 'show')->name('backend.user.show');
         Route::get('/backend/user/{id}/edit', 'edit')->name('backend.user.edit');

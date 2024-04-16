@@ -8,4 +8,9 @@ class User extends \App\Models\User{
     public static function find(){
         return static::query()->where('id', '<>', Auth::user()->id)->where('user_type', '!=', 4);
     }
+
+
+    public static function findStudents(){
+        return static::query()->where('user_type', '=', 4);
+    }
 }

@@ -35,6 +35,13 @@
                 </li>
 
                 <li>
+                    <a href="{{route('backend.user.students')}}" class=" waves-effect">
+                        <i class="ri-user-4-line"></i>
+                        <span>O'quvchilar</span>
+                    </a>
+                </li>
+
+                <li>
                     <a href="{{route('backend.courses.index')}}" class=" waves-effect">
                         <i class="ri-book-2-fill"></i>
                         <span>Fanlar</span>
