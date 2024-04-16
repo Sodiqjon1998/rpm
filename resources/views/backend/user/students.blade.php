@@ -60,7 +60,24 @@ $i = 1;
                                     </td>
                                     <td><?= $user->email ?></td>
                                     <td>{{ $user->created_at ?? '--' }}</td>
-
+                                    <td style="width: 160px;">
+                                        <a href="{{ route('backend.user.show', $user->id) }}"
+                                           class="btn btn-success btn-sm">
+                                            <i class="fa fa-eye"></i>
+                                        </a>
+                                        <a href="{{ route('backend.user.edit', $user->id) }}"
+                                           class="btn btn-primary btn-sm">
+                                            <i class="fa fa-pen"></i>
+                                        </a>
+                                        <form id="deleteForm" action="{{ route('backend.user.destroy', $user->id) }}"
+                                              method="POST" style="display: inline">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger btn-sm">
+                                                <i class="fa fa-trash"></i>
+                                            </button>
+                                        </form>
+                                    </td>
                                         <?php $i += 1; ?>
                                 </tr>
                             @endforeach

@@ -139,7 +139,7 @@ class UserController extends Controller
             ->leftJoin('group_item', 'users.id', '=', 'group_item.student_id')
             ->leftJoin('groups', 'group_item.group_id', '=', 'groups.id')
             ->where('group_item.finished_at', '=', null)
-            ->select(['users.name', 'users.email', 'users.created_at', 'groups.name as groupName'])
+            ->select(['users.id', 'users.name', 'users.email', 'users.created_at', 'groups.name as groupName'])
             ->paginate(20);
 
         return view('backend.user.students', [
