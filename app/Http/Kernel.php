@@ -57,6 +57,7 @@ class Kernel extends HttpKernel
         'auth' => \App\Http\Middleware\Authenticate::class,
         'auth.teacher' => \App\Http\Middleware\AuthenticateTeacher::class,
         'auth.parent' => \App\Http\Middleware\AuthenticateParent::class,
+        'auth.student' => \App\Http\Middleware\AuthenticateStudent::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'auth.session' => \Illuminate\Session\Middleware\AuthenticateSession::class,
         'cache.headers' => \Illuminate\Http\Middleware\SetCacheHeaders::class,
