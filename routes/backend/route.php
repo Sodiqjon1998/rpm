@@ -26,6 +26,7 @@ Route::middleware(['auth', 'verified', 'admin'])->group(function () {
         Route::get('/backend/user/{id}/groups', 'groups')->name('backend.user.groups');
         Route::get('/backend/user/{id}/pupils', 'pupils')->name('backend.user.pupils');
         Route::get('/backend/user/{id}/finished', 'finished')->name('backend.user.finished');
+        Route::post('/backend/user/addStudentStore', 'addStudentStore')->name('backend.users.addStudentStore');
     });
 
 

@@ -6,11 +6,15 @@ use App\Http\Controllers\Controller;
 use App\Models\Backend\User;
 use App\Models\Group;
 use App\Models\GroupItem;
+use App\Services\SendEmail;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Str;
+use Spatie\Dns\Dns;
+use Spatie\Dns\Exceptions\CouldNotFetchDns;
 
 class UserController extends Controller
 {
@@ -135,16 +139,39 @@ class UserController extends Controller
 
     public function students(){
 
+
         $students = User::findStudents()
-            ->leftJoin('group_item', 'users.id', '=', 'group_item.student_id')
+            ->rightJoin('group_item', 'users.id', '=', 'group_item.student_id')
             ->leftJoin('groups', 'group_item.group_id', '=', 'groups.id')
             ->where('group_item.finished_at', '=', null)
-            ->select(['users.id', 'users.name', 'users.email', 'users.created_at', 'groups.name as groupName'])
+            ->select(['users.id', 'users.img', 'users.name', 'users.email', 'users.created_at', 'groups.name as groupName'])
             ->paginate(20);
 
         return view('backend.user.students', [
             'students' => $students
         ]);
+    }
+
+    public function addStudentStore(Request $request){
+        try {
+            $password = Str::random(8);
+            User::insert([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => Hash::make($password),
+                'user_type' => 4
+            ]);
+            $url = URL::to('/student');
+            $data['url'] = $url;
+            $data['name'] = $request->name;
+            $data['email'] = $request->email;
+
+            $data['password'] = $password;
+            SendEmail::sendEmail($data);
+            return response()->json(['success' => true, 'data' => "Yuborildi"]);
+        }catch (\Exception $exception){
+            return response()->json(['success' => false, 'data' => $exception->getMessage()]);
+        }
     }
 
 

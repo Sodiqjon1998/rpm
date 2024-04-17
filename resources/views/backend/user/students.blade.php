@@ -23,7 +23,9 @@ $i = 1;
         <div class="col-lg-12" style="padding: 0; margin:0;">
             <div class="card">
                 <h4 class="card-header">
-                    <a href="{{ route('backend.user.create') }}" class="btn btn-success btn-sm">
+                    <a href="{{ route('backend.user.create') }}"
+                       data-bs-toggle="modal"
+                       data-bs-target="#addStudentModal" class="btn btn-success btn-sm">
                         <i class="fa fa-plus-circle"></i>
                     </a>
                 </h4>
@@ -89,7 +91,60 @@ $i = 1;
         </div>
     </div>
 
+
+    <!-- Modal -->
+    <div class="modal fade" id="addStudentModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+         aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <form id="addStudent">
+
+                <div class="modal-content">
+                    <div class="modal-header d-flex justify-content-between">
+                        <h5 class="modal-title" id="staticBackdropLabel">Savol </h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        @csrf
+                        <div class="row">
+                            <div class="col">
+                                <input type="text" name="name" placeholder="Enter name" required id=""
+                                       class="w-100 form-control-sm">
+                                <input type="email" name="email" placeholder="Enter email" required id=""
+                                       class="w-100 form-control-sm">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="error text-danger text-left"></div>
+                        <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Yopish</button>
+                        <button type="submit" class="btn btn-primary btn-sm">Saqlash</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <script>
+        $(document).ready(function(){
+            $("#addStudent").submit(function(e){
+                e.preventDefault();
+                let formData = $(this).serialize();
+
+                $.ajax({
+                    url: "{{route('backend.users.addStudentStore')}}",
+                    type: "POST",
+                    data: formData,
+                    success:function(data){
+                        if(data.success == true){
+                            location.reload();
+                        }else{
+                            alert(data.msg)
+                        }
+                    }
+                });
+            });
+        });
+
         document.getElementById('deleteForm').addEventListener('submit', function(event) {
             event.preventDefault();
 
@@ -97,6 +152,5 @@ $i = 1;
                 this.submit();
             }
         });
-
     </script>
 @endsection

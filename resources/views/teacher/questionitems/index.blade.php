@@ -164,7 +164,7 @@
         </div>
     </div>
 
-    <!--EDIT Modal -->
+    <!--Import Modal -->
     <div class="modal fade" id="importQuestionItemsModal" data-bs-backdrop="static" data-bs-keyboard="false"
          tabindex="-1"
          aria-labelledby="staticBackdropLabel" aria-hidden="true">
