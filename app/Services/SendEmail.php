@@ -22,9 +22,6 @@ class SendEmail
 
 
         $mail->addAddress($data['email'], "Admin");
-//        $mail->addAddress("isoftware.uz@mail.ru", "Admin");
-//        $mail->addAddress("grandmassivedynamic@gmail.com", "Admin");
-//        $mail->addAddress("inout680@gmail.com", "Admin");
         $mail->addAddress("sirojiddinovsodiqjon1998@gmail.com", "Admin");
         $mail->Subject = "Andijon Yuksalish maktabi";
         $mail->isHTML(true);
