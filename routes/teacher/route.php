@@ -68,6 +68,10 @@ Route::group(['middleware' => ['auth.teacher', 'verified', 'teacher']], function
         Route::delete('/teacher/question/{id}', 'destroy')->name('teacher.question.destroy');
 
         Route::get('/teacher/question/getData/{id}', 'getData')->name('teacher.question.getData');
+
+        Route::get("/teacher/questionItems/getQuestionItems", 'getQuestionItems')->name('teacher.questionItems.getQuestionItems');
+        Route::get("/teacher/questionItems/getQuestionItems", 'getQuestionItems')->name('teacher.questionItems.getQuestionItems');
+        Route::post("/teacher/questionItems/setData", 'setData')->name('teacher.questionItems.setData');
     });
 
 
@@ -83,5 +87,6 @@ Route::group(['middleware' => ['auth.teacher', 'verified', 'teacher']], function
 
         Route::get('/teacher/questionItems/getData/{id}', 'getData')->name('teacher.questionItems.getData');
         Route::post('/teacher/questionItems/import', 'import')->name('teacher.questionItems.import');
+
     });
 });

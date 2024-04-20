@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Teacher;
 use App\Http\Controllers\Controller;
 use App\Imports\QnaImport;
 use App\Models\Answer;
+use App\Models\QnaExams;
 use App\Models\QuestionItem;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -141,7 +142,7 @@ class QuestionItemController extends Controller
             }
 
             return response()->json(['success' => true, 'msg' => "Ma'lumotlar tahrirlandi!"]);
-        }catch (\Exception $e){
+        } catch (\Exception $e) {
             return response()->json(['success' => false, 'msg' => $e->getMessage()]);
         }
     }
@@ -184,11 +185,12 @@ class QuestionItemController extends Controller
         return redirect()->route('teacher.questionItems.index');
     }
 
-    public function import(Request $request){
+    public function import(Request $request)
+    {
         try {
             Excel::import(new QnaImport(), $request->file('file'));
-            return  response()->json(['success' => true, 'msg' => "Import Q & I successfully!"]);
-        }catch (\Exception $e){
+            return response()->json(['success' => true, 'msg' => "Import Q & I successfully!"]);
+        } catch (\Exception $e) {
             return response()->json(['success' => false, 'msg' => $e->getMessage()]);
         }
     }

@@ -2,8 +2,6 @@
 
 <?php
 use App\Models\Group;
-use App\Models\GroupItems;
-use Illuminate\Support\Facades\DB;
 
 ?>
 

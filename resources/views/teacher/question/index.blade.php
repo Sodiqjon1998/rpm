@@ -2,6 +2,11 @@
 
 @section('content')
 
+    <style>
+        .multiselect-dropdown {
+            width: 100% !important;
+        }
+    </style>
     <div class="row">
         <div class="col-12" style="padding: 0 !important; margin: 0 !important; text-align:center;">
             <nav aria-label="breadcrumb" style="display:flex; justify-content:space-between; align-items: center;">
@@ -53,6 +58,13 @@
                                         <td>{{ $question->attempt }}</td>
                                         <td>{{ $question->created_at }}</td>
                                         <td style="width: 140px;">
+                                            <a href="#"
+                                               data-bs-toggle="modal"
+                                               data-bs-target="#addQNAModal"
+                                               class="btn btn-outline-info btn-sm addQuestionItems"
+                                               data-id="{{$question->id}}">
+                                                <i class="fa fa-question"></i>
+                                            </a>
                                             <a href="{{ route('teacher.question.show', $question->id) }}"
                                                class="btn btn-success btn-sm">
                                                 <i class="fa fa-eye"></i>
@@ -177,6 +189,51 @@
         </div>
     </div>
 
+    <!-- QNA Modal -->
+    <div class="modal fade" id="addQNAModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+         aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <form id="addQNA">
+
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel">Savol qo'shish</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        @csrf
+                        <input type="hidden" name="question_id" id="questionId">
+
+                        <input type="search" name="search" id="search" class="form-control-sm">
+                        {{--                            <select class="selectpicker" multiple data-live-search="true" name="cat[]">--}}
+                        {{--                                <option value="php">PHP</option>--}}
+                        {{--                                <option value="react">React</option>--}}
+                        {{--                                <option value="jquery">JQuery</option>--}}
+                        {{--                                <option value="javascript">Javascript</option>--}}
+                        {{--                                <option value="angular">Angular</option>--}}
+                        {{--                                <option value="vue">Vue</option>--}}
+                        {{--                            </select>--}}
+                        <table class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th width="20px">Select</th>
+                                    <th>Question</th>
+                                </tr>
+                            </thead>
+                            <tbody class="addBody">
+
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Yopish</button>
+                        <button type="submit" class="btn btn-primary">Saqlash</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <script>
 
 
@@ -242,17 +299,78 @@
                  });
             });
 
-            document.getElementById('deleteForm').addEventListener('submit', function(event) {
-                    event.preventDefault();
+            $(".addQuestionItems").click(function(e){
+                e.preventDefault();
+                let id = $(this).attr('data-id');
+                let question_id = document.getElementById('questionId').value = id;
 
-                    if (confirm('Haqiqatan ham ma\'lumotni o\'chirmoqchimisiz?')) {
-                        this.submit();
+                let formData = $(this).serialize();
+
+
+                $.ajax({
+                    url: "{{route('teacher.questionItems.getQuestionItems')}}",
+                    type:"GET",
+                    data:{question_id: question_id},
+                    success:function(data){
+                        let questionItems = data.data;
+                        let html = '';
+
+                        if(questionItems.length > 0){
+                            for(let  i = 0; i<questionItems.length; i++){
+                                html +=`
+                                    <tr>
+                                        <td>
+                                            <input type="checkbox" name="questionItems_ids[]" id="" value="`+questionItems[i]['id']+`">
+                                        </td>
+                                        <td>`+questionItems[i]['question']+`</td>
+                                    </tr>
+                                `;
+                            }
+                        }else{
+                            html +=`
+                                <tr>
+                                    <td colspan="2">Question Items not Available!</td>
+                                </tr>
+                            `;
+                        }
+
+                        $('.addBody').html(html);
                     }
                 });
+            });
+
+
+            $("#addQNA").submit(function(e){
+                e.preventDefault();
+
+                let formData = $(this).serialize();
+
+                $.ajax({
+                    url: "{{route('teacher.questionItems.setData')}}",
+                    type: "POST",
+                    data:formData,
+                    success:function(data){
+                        if(data.success == true){
+                            location.reload();
+                        }else{
+                            alert(data.msg);
+                        }
+                    }
+                });
+            });
+
+            document.getElementById('deleteForm').addEventListener('submit', function(event) {
+                event.preventDefault();
+
+                if (confirm('Haqiqatan ham ma\'lumotni o\'chirmoqchimisiz?')) {
+                    this.submit();
+                }
+            });
+
+
+
+            $('select').selectpicker();
         });
-
-
-
 
 
 
