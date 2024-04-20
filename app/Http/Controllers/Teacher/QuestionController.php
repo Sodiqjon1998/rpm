@@ -57,9 +57,16 @@ class QuestionController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Question $question)
+    public function show(Request $request)
     {
-        //
+        try {
+
+            $questions = Question::with('quiz')->where(['id' => $request->question_id])->first();
+
+            return response()->json(['success' => true, 'data' => $questions]);
+        } catch (\Exception $exception) {
+            return response()->json(['success' => false, 'msg' => $exception->getMessage()]);
+        }
     }
 
     /**
@@ -161,7 +168,7 @@ class QuestionController extends Controller
                 }
 
                 return response()->json(['success' => true, 'msg' => "Successfully!"]);
-            }else{
+            } else {
                 return response()->json(['success' => false, 'msg' => "Not Successfully!"]);
             }
         } catch (\Exception $exception) {

@@ -7,6 +7,35 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Facades\DB;
 
+/**
+ * 
+ *
+ * @property int $id
+ * @property string $name
+ * @property int $teacher_id
+ * @property int $lesson_per_month
+ * @property int $status
+ * @property int $created_by
+ * @property int $updated_by
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property int $course_id
+ * @property-read \App\Models\Course $course
+ * @method static \Illuminate\Database\Eloquent\Builder|Group newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Group newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Group query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Group whereCourseId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Group whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Group whereCreatedBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Group whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Group whereLessonPerMonth($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Group whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Group whereStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Group whereTeacherId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Group whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Group whereUpdatedBy($value)
+ * @mixin \Eloquent
+ */
 class Group extends Model
 {
     use HasFactory;

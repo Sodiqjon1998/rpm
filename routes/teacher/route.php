@@ -61,7 +61,7 @@ Route::group(['middleware' => ['auth.teacher', 'verified', 'teacher']], function
     Route::prefix('teacher')->controller(QuestionController::class)->group(function () {
         Route::get('/teacher/question/index/{id}', 'index')->name('teacher.question.index');
         Route::get('/teacher/question/create', 'create')->name('teacher.question.create');
-        Route::get('/teacher/question/{id}', 'show')->name('teacher.question.show');
+        Route::get('/teacher/question', 'show')->name('teacher.question.show');
         Route::get('/teacher/question/{id}/edit', 'edit')->name('teacher.question.edit');
         Route::post('/teacher/question/store', 'store')->name('teacher.question.store');
         Route::put('/teacher/question', 'update')->name('teacher.question.update');
