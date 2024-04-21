@@ -19,8 +19,9 @@
         <div class="col-lg-12" style="padding: 0; margin:0;">
             <div class="card">
                 <h4 class="card-header">
-                    <a href="{{ route('teacher.question.create') }}" class="btn btn-success btn-sm" data-bs-toggle="modal"
-                        data-bs-target="#addQuestionModal">
+                    <a href="{{ route('teacher.question.create') }}" class="btn btn-success btn-sm"
+                       data-bs-toggle="modal"
+                       data-bs-target="#addQuestionModal">
                         <i class="fa fa-plus-circle"></i>
                     </a>
                 </h4>
@@ -28,64 +29,68 @@
                     <div class="table-responsive">
                         <table class="table mb-0 table-bordered table-sm" style="font-size: 14px;">
                             <thead>
-                                <tr class="text-center bg-dark" style="color: #FFFFFF">
-                                    <th width="30" align="center">#</th>
-                                    <th>Savol</th>
-                                    <th>Belgilangan kuni</th>
-                                    <th>Belgilangan soati</th>
-                                    <th>Urunishlar soni</th>
-                                    <th>Vaqti</th>
-                                    <th>Action</th>
-                                </tr>
+                            <tr class="text-center bg-dark" style="color: #FFFFFF">
+                                <th width="30" align="center">#</th>
+                                <th>Savol</th>
+                                <th>Belgilangan kuni</th>
+                                <th>Belgilangan soati</th>
+                                <th>Urunishlar soni</th>
+                                <th>Vaqti</th>
+                                <th>Action</th>
+                            </tr>
 
                             </thead>
                             <tbody>
-                                @if (count($questions) > 0)
+                            @if (count($questions) > 0)
 
-                                    @foreach ($questions as $key => $question)
-                                        <tr style="padding: 0; margin:0;">
-                                            <th scope="row" width="30" align="center"><?= ++$key ?></th>
-                                            <td>{{ $question->name }}</td>
-                                            <td>{{ $question->date }}</td>
-                                            <td>{{ $question->time }}</td>
-                                            <td>{{ $question->attempt }} Time</td>
-                                            <td>{{ $question->created_at }}</td>
-                                            <td style="width: 180px;">
-                                                <a href="#" data-bs-toggle="modal" data-bs-target="#addQNAModal"
-                                                    class="btn btn-outline-info btn-sm addQuestionItems"
-                                                    data-id="{{ $question->id }}"> Add
-                                                    <i class="fa fa-question-circle"></i>
-                                                </a>
-                                                <a href="{{ route('teacher.question.show', $question->id) }}"
-                                                    class="btn btn-success btn-sm showButton" data-bs-toggle="modal"
-                                                    data-bs-target="#showQuestionModal" data-id="{{ $question->id }}">
-                                                    <i class="fa fa-eye"></i>
-                                                </a>
-                                                <a href="{{ route('teacher.question.edit', $question->id) }}"
-                                                    class="btn btn-primary btn-sm editButton" data-bs-toggle="modal"
-                                                    data-bs-target="#editQuestionModal" data-id="{{ $question->id }}">
-                                                    <i class="fa fa-pen"></i>
-                                                </a>
-                                                <form id="deleteForm"
-                                                    action="{{ route('teacher.question.destroy', $question->id) }}"
-                                                    method="POST" style="display: inline">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger btn-sm questionDelete"
+                                @foreach ($questions as $key => $question)
+                                    <tr style="padding: 0; margin:0;">
+                                        <th scope="row" width="30" align="center"><?= ++$key ?></th>
+                                        <td>{{ $question->name }}</td>
+                                        <td>{{ $question->date }}</td>
+                                        <td>{{ $question->time }}</td>
+                                        <td>{{ $question->attempt }} Time</td>
+                                        <td>{{ $question->created_at }}</td>
+                                        <td style="width: 220px;">
+                                            <a href="#" data-bs-toggle="modal" data-bs-target="#showQnaExamsModal"
+                                               class="btn btn-dark btn-sm showQnaExams"
+                                               data-id="{{ $question->id }}"> <i class="fa fa-record-vinyl"></i>
+                                            </a>
+                                            <a href="#" data-bs-toggle="modal" data-bs-target="#addQNAModal"
+                                               class="btn btn-outline-info btn-sm addQuestionItems"
+                                               data-id="{{ $question->id }}"> Add
+                                                <i class="fa fa-question-circle"></i>
+                                            </a>
+                                            <a href="{{ route('teacher.question.show', $question->id) }}"
+                                               class="btn btn-success btn-sm showButton" data-bs-toggle="modal"
+                                               data-bs-target="#showQuestionModal" data-id="{{ $question->id }}">
+                                                <i class="fa fa-eye"></i>
+                                            </a>
+                                            <a href="{{ route('teacher.question.edit', $question->id) }}"
+                                               class="btn btn-primary btn-sm editButton" data-bs-toggle="modal"
+                                               data-bs-target="#editQuestionModal" data-id="{{ $question->id }}">
+                                                <i class="fa fa-pen"></i>
+                                            </a>
+                                            <form id="deleteForm"
+                                                  action="{{ route('teacher.question.destroy', $question->id) }}"
+                                                  method="POST" style="display: inline">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-danger btn-sm questionDelete"
                                                         data-id="{{ $question->id }}">
-                                                        <i class="fa fa-trash"></i>
-                                                    </button>
-                                                </form>
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                @else
-                                    <tr>
-                                        <td colspan="8">
-                                            Natijalar topilmadi!
+                                                    <i class="fa fa-trash"></i>
+                                                </button>
+                                            </form>
                                         </td>
                                     </tr>
-                                @endif
+                                @endforeach
+                            @else
+                                <tr>
+                                    <td colspan="8">
+                                        Natijalar topilmadi!
+                                    </td>
+                                </tr>
+                            @endif
 
                             </tbody>
                         </table>
@@ -97,7 +102,7 @@
 
     <!-- Modal -->
     <div class="modal fade" id="addQuestionModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+         aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog">
             <form id="addQuestion">
 
@@ -139,7 +144,7 @@
 
     {{-- EDIT DATA --}}
     <div class="modal fade" id="editQuestionModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+         aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog">
             <form id="editQuestion">
 
@@ -156,7 +161,7 @@
                             <div class="col-md-12">
                                 <label for="name">Savol</label>
                                 <input type="text" name="name" id="edit_name" min="{{ date('Y-m-d') }}"
-                                    class="form-control" required>
+                                       class="form-control" required>
                             </div>
                             <div class="col-md-12">
                                 <label for="name">Vaqti</label>
@@ -181,9 +186,9 @@
         </div>
     </div>
 
-    {{-- SHOW ANSWER --}}
+    {{-- SHOW QUESTION --}}
     <div class="modal fade" id="showQuestionModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+         aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog">
 
             <div class="modal-content">
@@ -204,9 +209,43 @@
         </div>
     </div>
 
+
+    {{-- SHOW QNAEXAMS --}}
+    <div class="modal fade" id="showQnaExamsModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+         aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+{{--            <form id="showQnaExams">--}}
+{{--                @csrf--}}
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel">QNA_Exam Show</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <table class="table table-striped table-bordered table-hover table-sm" >
+                            <thead>
+                                <tr>
+                                    <th width="20px" class="pb-2">T/R</th>
+                                    <th class="d-flex align-items-center justify-content-between">Questions <input type="search" name="" id="" placeholder="Qidiruv" class="form-control-sm"></th>
+                                    <th class="pb-2">O'chirish</th>
+                                </tr>
+                            </thead>
+                            <tbody id="showQnaExamsTable">
+
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="modal-footer p-0 m-0">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Yopish</button>
+                    </div>
+                </div>
+{{--            </form>--}}
+        </div>
+    </div>
+
     <!-- QNA Modal -->
     <div class="modal fade" id="addQNAModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+         aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog">
             <form id="addQNA">
 
@@ -218,9 +257,8 @@
                     <div class="modal-body">
                         @csrf
                         <input type="hidden" name="question_id" id="questionId">
-
-                        <input type="search" name="search" id="search" class="form-control">
-                        <br><br>
+                        <input type="search" name="search" id="search" class="form-control" placeholder="Qidiruv">
+                        <br>
 
                         {{--                            <select class="selectpicker" multiple data-live-search="true" name="cat[]"> --}}
                         {{--                                <option value="php">PHP</option> --}}
@@ -232,10 +270,10 @@
                         {{--                            </select> --}}
                         <table class="table table-bordered table-striped" id="questionItemsTable">
                             <thead>
-                                <tr>
-                                    <th width="20px">Select</th>
-                                    <th>Question</th>
-                                </tr>
+                            <tr>
+                                <th width="20px">Select</th>
+                                <th>Question</th>
+                            </tr>
                             </thead>
                             <tbody class="addBody">
 
@@ -271,11 +309,11 @@
                 });
             });
             {{-- Question update --}}
-            $('#editQuestion').submit(function(e) {
-                e.preventDefault();
-                let formData = $(this).serialize();
-                $.ajax({
-                    url: "{{ route('teacher.question.update') }}",
+        $('#editQuestion').submit(function(e) {
+            e.preventDefault();
+            let formData = $(this).serialize();
+            $.ajax({
+                url: "{{ route('teacher.question.update') }}",
                     type: "PUT",
                     data: formData,
                     success: function(data) {
@@ -289,11 +327,11 @@
             });
 
             {{-- Get  EDIT AJAX     --}}
-            $('.editButton').click(function(e) {
-                e.preventDefault();
-                let id = $(this).attr('data-id');
-                document.getElementById('edit_question_id').value = id;
-                let url = '{{ route('teacher.question.getData', 'id') }}';
+        $('.editButton').click(function(e) {
+            e.preventDefault();
+            let id = $(this).attr('data-id');
+            document.getElementById('edit_question_id').value = id;
+            let url = '{{ route('teacher.question.getData', 'id') }}';
 
                 url = url.replace('id', id);
 
@@ -316,16 +354,16 @@
 
 
             {{-- Get QuestionItems --}}
-            $(".addQuestionItems").click(function(e) {
-                e.preventDefault();
-                let id = $(this).attr('data-id');
-                let question_id = document.getElementById('questionId').value = id;
+        $(".addQuestionItems").click(function(e) {
+            e.preventDefault();
+            let id = $(this).attr('data-id');
+            let question_id = document.getElementById('questionId').value = id;
 
-                let formData = $(this).serialize();
+            let formData = $(this).serialize();
 
 
-                $.ajax({
-                    url: "{{ route('teacher.questionItems.getQuestionItems') }}",
+            $.ajax({
+                url: "{{ route('teacher.questionItems.getQuestionItems') }}",
                     type: "GET",
                     data: {
                         question_id: question_id
@@ -361,13 +399,16 @@
             });
 
 
-            $("#addQNA").submit(function(e) {
-                e.preventDefault();
 
-                let formData = $(this).serialize();
 
-                $.ajax({
-                    url: "{{ route('teacher.questionItems.setData') }}",
+            {{--ADD QNAEXAMS--}}
+        $("#addQNA").submit(function(e) {
+            e.preventDefault();
+
+            let formData = $(this).serialize();
+
+            $.ajax({
+                url: "{{ route('teacher.questionItems.setData') }}",
                     type: "POST",
                     data: formData,
                     success: function(data) {
@@ -380,6 +421,8 @@
                 });
             });
 
+
+            {{--Show Question--}}
             $(".showButton").click(function(e) {
                 e.preventDefault();
 
@@ -444,6 +487,77 @@
                 });
             });
 
+
+
+            $(".showQnaExams").click(function(e){
+                e.preventDefault();
+                let question_id = $(this).attr('data-id');
+
+                $.ajax({
+                    url: "{{route('teacher.question.getQnaExams')}}",
+                    type:"GET",
+                    data:{question_id:question_id},
+                    success:function(data){
+                        let html = '';
+                        let questionItems = data.data;
+
+                        if(questionItems != 0){
+                             for(let i = 0; i < questionItems.length; i++){
+                                html += `
+                                    <tr>
+                                        <td>`+ (i+1) +`</td>
+                                        <td>`+ questionItems[i]['question_items'][0]['question'] +`</td>
+                                        <td width="10px">
+                                            <button class="btn btn-outline-danger btn-sm deleteQnaExams" data-id="`+ questionItems[i]['id'] +`">
+                                                <i class="fa fa-trash text-danger"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                `;
+                            }
+                        }else{
+                            html +=`
+                                <tr>
+                                    <td colspan="2">
+                                        Savollar yo'q
+                                    </td>
+                                </tr>
+                            `;
+                        }
+
+
+                        $("#showQnaExamsTable").html(html);
+                    }
+                });
+            });
+
+            $(document).on('click', '.deleteQnaExams', function(e){
+                e.preventDefault();
+                let qnaExamId = $(this).attr('data-id');
+
+                let check = confirm("Ushbu elementni o'chirmoqchimisiz!");
+
+                let obj = $(this);
+
+                if(check == true){
+                    $.ajax({
+                        url:"{{route('teacher.qnaExam.delete')}}",
+                        type:"GET",
+                        data:{qnaExamId:qnaExamId},
+                        success:function(data){
+                            if(data.success == true){
+                                obj.parent().parent().remove();
+                            }else{
+                                alert(data.msg);
+                            }
+                        }
+                    });
+                }else{
+                    alert("Xatolik yuz berdi");
+                }
+            });
+
+
             $("#search").keyup(function() {
                 let input, filter, table, tr, td, i, txtValue;
                 input = document.getElementById("search");
@@ -474,7 +588,10 @@
 
 
 
+
+
             $('select').selectpicker();
         });
+
     </script>
 @stop

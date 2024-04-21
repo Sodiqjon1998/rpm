@@ -27,13 +27,6 @@
                     </a>
                 </li>
 
-                <li>
-                    <a href="{{route('teacher.groups.index')}}" class=" waves-effect">
-                        <i class="ri-calendar-2-line"></i>
-                        <span>Sinflar</span>
-                    </a>
-                </li>
-
                 <li class="menu-title">Components</li>
 
                 <li>

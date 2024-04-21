@@ -72,6 +72,10 @@ Route::group(['middleware' => ['auth.teacher', 'verified', 'teacher']], function
         Route::get("/teacher/questionItems/getQuestionItems", 'getQuestionItems')->name('teacher.questionItems.getQuestionItems');
         Route::get("/teacher/questionItems/getQuestionItems", 'getQuestionItems')->name('teacher.questionItems.getQuestionItems');
         Route::post("/teacher/questionItems/setData", 'setData')->name('teacher.questionItems.setData');
+
+
+        Route::get("/teacher/question/getQnaExams", 'getQnaExams')->name('teacher.question.getQnaExams');
+        Route::get('/teacher/qnaExam/delete', 'delete')->name('teacher.qnaExam.delete');
     });
 
 

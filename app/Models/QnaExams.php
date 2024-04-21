@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * 
+ *
  *
  * @property int $id
  * @property int $question_id
@@ -32,4 +32,9 @@ class QnaExams extends Model
     use HasFactory;
 
     protected $table = "qna_exams";
+
+
+    public function questionItems(){
+        return $this->hasMany(QuestionItem::class,'id','question_item_id');
+    }
 }

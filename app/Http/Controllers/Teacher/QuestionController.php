@@ -175,4 +175,31 @@ class QuestionController extends Controller
             return response()->json(['success' => false, 'msg' => $exception->getMessage()]);
         }
     }
+
+
+    public function getQnaExams(Request $request)
+    {
+        try {
+            $qnaExams = QnaExams::where(['question_id' => $request->question_id])->with('questionItems')->get();
+
+            return response()->json(['success' => true, 'data' => $qnaExams]);
+        } catch (\Exception $exception) {
+            return response()->json(['success' => false, 'msg' => $exception->getMessage()]);
+        }
+    }
+
+
+    public function delete(Request $request)
+    {
+        try {
+            $qnaExam = QnaExams::where(['id' => $request->qnaExamId])->delete();
+            if($qnaExam == true){
+                return response()->json(['success' => true, 'msg' => "O'chirildi"]);
+            }else{
+                return response()->json(['success' => false, 'msg' => "O'chirishda xatolik!"]);
+            }
+        }catch (\Exception $exception){
+            return response()->json(['success' => false, 'msg' => $exception->getMessage()]);
+        }
+    }
 }
