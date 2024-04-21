@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * 
+ *
  *
  * @property int $id
  * @property string $name
@@ -16,6 +16,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $created_by
  * @property int $updated_by
  * @property int $attempt
+ * @property string $enterance_id
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @method static \Illuminate\Database\Eloquent\Builder|Question newModelQuery()

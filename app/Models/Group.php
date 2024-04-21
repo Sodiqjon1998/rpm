@@ -5,10 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Facades\DB;
 
 /**
- * 
+ *
  *
  * @property int $id
  * @property string $name
@@ -113,4 +114,8 @@ class Group extends Model
         return $this->belongsTo(Course::class);
     }
 
+    public function groupItems():HasMany
+    {
+        return $this->hasMany(GroupItem::class,'group_id', 'id');
+    }
 }

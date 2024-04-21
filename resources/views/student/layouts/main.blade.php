@@ -39,6 +39,9 @@
 
     <link href="{{ asset('assets/css/img.css') }}" rel="stylesheet" type="text/css" />
 
+    {{--    ADD  --}}
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+
     <!-- Lightbox css -->
     <link href="{{ asset('assets/libs/magnific-popup/magnific-popup.css') }}" rel="stylesheet" type="text/css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>

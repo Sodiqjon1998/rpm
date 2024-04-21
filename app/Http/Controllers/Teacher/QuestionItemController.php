@@ -18,7 +18,7 @@ class QuestionItemController extends Controller
      */
     public function index()
     {
-        $questionItems = QuestionItem::with('answers')->get();
+        $questionItems = QuestionItem::with('answers')->where(['created_by' => Auth::user()->id])->get();
         return view('teacher.questionitems.index', [
             'questionItems' => $questionItems
         ]);

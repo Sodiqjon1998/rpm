@@ -44,6 +44,7 @@ class QuestionController extends Controller
             $question->date = $request->input('date');
             $question->time = $request->input('time');
             $question->attempt = $request->input('attempt');
+            $question->enterance_id = uniqid('exid');
             $question->quiz_id = $request->input('quiz_id');
             $question->created_by = Auth::user()->id;
             $question->updated_by = Auth::user()->id;
@@ -131,7 +132,7 @@ class QuestionController extends Controller
     public function getQuestionItems(Request $request)
     {
         try {
-            $questions = QuestionItem::all();
+            $questions = QuestionItem::where(['created_by' => Auth::user()->id])->get();
 
             if (count($questions) > 0) {
                 $data = [];

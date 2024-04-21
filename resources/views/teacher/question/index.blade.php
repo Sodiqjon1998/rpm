@@ -35,6 +35,7 @@
                                 <th>Belgilangan kuni</th>
                                 <th>Belgilangan soati</th>
                                 <th>Urunishlar soni</th>
+                                <th>Havola</th>
                                 <th>Vaqti</th>
                                 <th>Action</th>
                             </tr>
@@ -50,6 +51,7 @@
                                         <td>{{ $question->date }}</td>
                                         <td>{{ $question->time }}</td>
                                         <td>{{ $question->attempt }} Time</td>
+                                        <td>{{ $question->enterance_id }}</td>
                                         <td>{{ $question->created_at }}</td>
                                         <td style="width: 220px;">
                                             <a href="#" data-bs-toggle="modal" data-bs-target="#showQnaExamsModal"
