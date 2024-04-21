@@ -2,8 +2,10 @@
 
 namespace App\Models\Teacher;
 
+use App\Models\QnaExams;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  *
@@ -47,5 +49,10 @@ class Question extends \App\Models\Question
     public function quiz():BelongsTo
     {
         return $this->belongsTo(Quiz::class);
+    }
+
+    public function getQnaExam():HasMany
+    {
+        return $this->hasMany(QnaExams::class, 'question_id', 'id');
     }
 }

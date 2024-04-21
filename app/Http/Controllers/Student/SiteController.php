@@ -29,15 +29,6 @@ class SiteController extends Controller
         ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function exam(Request $request)
-    {
-        $exam = Question::with('quiz')->orderBy('date')->get();
-        dd($exam);
-        return view('student.site.exam');
-    }
 
     /**
      * Display the specified resource.
