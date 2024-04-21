@@ -16,7 +16,7 @@
             <h4 class="text-muted text-center font-size-18"><b>Sign In</b></h4>
 
             <div class="p-3">
-                <form method="POST" class="form-horizontal mt-3" action="{{route('teacher.login')}}">
+                <form method="POST" class="form-horizontal mt-3" action="{{route('student.login')}}">
                     @csrf
 
                     <div class="form-group mb-3 row">
