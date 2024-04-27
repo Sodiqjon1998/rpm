@@ -15,5 +15,9 @@ Route::group(['middleware' => ['auth.student', 'verified', 'student']], function
     Route::prefix('student')->controller(ExamController::class)->group(function () {
         Route::get('/exam/index', 'index')->name('exam.index');
         Route::get('/exam/show/{id}', 'show')->name('exam.show');
+
+
+        Route::post('/exam/submit-exam', 'submitExam')->name('submitExam');
+        Route::get('/exam/thank-you', 'thankYou')->name('thank-you');
     });
 });

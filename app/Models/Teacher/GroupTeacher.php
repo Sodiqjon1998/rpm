@@ -35,6 +35,8 @@ use App\Models\Group;
  * @method static \Illuminate\Database\Eloquent\Builder|GroupTeacher whereTeacherId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|GroupTeacher whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|GroupTeacher whereUpdatedBy($value)
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\GroupItem> $groupItems
+ * @property-read int|null $group_items_count
  * @mixin \Eloquent
  */
 class GroupTeacher extends Group

@@ -3,8 +3,13 @@
 namespace App\Http\Controllers\Student;
 
 use App\Http\Controllers\Controller;
+use App\Models\ExamsAnswer;
+use App\Models\ExamsAttempt;
 use App\Models\QnaExams;
 use App\Models\Teacher\Question;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 
 class ExamController extends Controller
 {
@@ -52,5 +57,37 @@ class ExamController extends Controller
         } else {
             return view('404');
         }
+    }
+
+
+    public function submitExam(Request $request)
+    {
+        $attempt_id = ExamsAttempt::insertGetId([
+            'exam_id' => $request->exam_id,
+            'user_id' => Auth::user()->id,
+            'created_by' => Auth::user()->id,
+            'updated_by' => Auth::user()->id,
+        ]);
+
+        $qCount = count($request->q);
+
+        for ($i = 0; $i < $qCount; $i++) {
+           if(!empty(request()->input('ans_' . ($i + 1)))){
+               ExamsAnswer::insert([
+                   'attempt_id' => $attempt_id,
+                   'question_item_id' => $request->q[$i],
+                   'answer_id' => request()->input('ans_' . ($i + 1)),
+                   'created_by' => Auth::user()->id,
+                   'updated_by' => Auth::user()->id
+               ]);
+           }
+        }
+
+        return redirect()->route('thank-you');
+    }
+
+    public function thankYou()
+    {
+        return view('student.exam.thank-you');
     }
 }

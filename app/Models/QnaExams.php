@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- *
+ * 
  *
  * @property int $id
  * @property int $question_id
@@ -25,6 +25,10 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|QnaExams whereQuestionItemId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|QnaExams whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|QnaExams whereUpdatedBy($value)
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Answer> $answers
+ * @property-read int|null $answers_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\QuestionItem> $questionItems
+ * @property-read int|null $question_items_count
  * @mixin \Eloquent
  */
 class QnaExams extends Model

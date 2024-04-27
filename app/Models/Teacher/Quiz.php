@@ -28,6 +28,7 @@ use Illuminate\Support\Facades\Auth;
  * @method static \Illuminate\Database\Eloquent\Builder|Quiz whereTeacherId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Quiz whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Quiz whereUpdatedBy($value)
+ * @property-read \App\Models\User $teacher
  * @mixin \Eloquent
  */
 class Quiz extends \App\Models\Quiz
