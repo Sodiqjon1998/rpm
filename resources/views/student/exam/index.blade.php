@@ -25,7 +25,7 @@
                                         <i class="ri-alarm-line me-1 align-middle"></i>{{date('M d, Y', strtotime($exam->date))}}
                                         <i class="ri-time-fill"></i> {{$exam->time}}
                                     </span>
-                                    Urunishlar soni: {{$exam->attempt}}
+                                    Urunishlar soni: {{$exam->attempt - $exam->getIdAttributes($exam->id)}}
                                     <a href="{{route('exam.show', $exam->enterance_id)}}" class="btn btn-link btn-sm">
                                         <i class="ri-link"></i>
                                     </a>
@@ -44,26 +44,26 @@
     </div>
 
     <script>
-        $(document).ready(function(e){
-           $(".copied").click(function(e){
-               e.preventDefault();
-               $(this).prepend('<span class="copied_text">Copied</span>');
+        $(document).ready(function (e) {
+            $(".copied").click(function (e) {
+                e.preventDefault();
+                $(this).prepend('<span class="copied_text">Copied</span>');
 
-               let code = $(this).attr('data-code');
+                let code = $(this).attr('data-code');
 
-               let url = "{{URL::to('/student')}}/exam/show/"+code;
+                let url = "{{URL::to('/student')}}/exam/show/" + code;
 
-               let $temp = $("<input>");
+                let $temp = $("<input>");
 
-               $("body").append($temp);
-               $temp.val(url).select();
-               document.execCommand("copy");
-               $temp.remove();
+                $("body").append($temp);
+                $temp.val(url).select();
+                document.execCommand("copy");
+                $temp.remove();
 
-               setTimeout(()=>{
+                setTimeout(() => {
                     $(".copied_text").remove();
-               }, 1000);
-           });
+                }, 1000);
+            });
         });
 
     </script>

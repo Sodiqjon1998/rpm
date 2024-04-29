@@ -69,7 +69,7 @@
                                                 <i class="fa fa-eye"></i>
                                             </a>
                                             <a href="{{ route('teacher.question.edit', $question->id) }}"
-                                               class="btn btn-primary btn-sm editButton" data-bs-toggle="modal"
+                                               class="btn btn-primary btn-sm editQuestionButton" data-bs-toggle="modal"
                                                data-bs-target="#editQuestionModal" data-id="{{ $question->id }}">
                                                 <i class="fa fa-pen"></i>
                                             </a>
@@ -216,32 +216,36 @@
     <div class="modal fade" id="showQnaExamsModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
          aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog">
-{{--            <form id="showQnaExams">--}}
-{{--                @csrf--}}
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="staticBackdropLabel">QNA_Exam Show</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <table class="table table-striped table-bordered table-hover table-sm" >
-                            <thead>
-                                <tr>
-                                    <th width="20px" class="pb-2">T/R</th>
-                                    <th class="d-flex align-items-center justify-content-between">Questions <input type="search" name="" id="" placeholder="Qidiruv" class="form-control-sm"></th>
-                                    <th class="pb-2">O'chirish</th>
-                                </tr>
-                            </thead>
-                            <tbody id="showQnaExamsTable">
-
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="modal-footer p-0 m-0">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Yopish</button>
-                    </div>
+            {{--            <form id="showQnaExams">--}}
+            {{--                @csrf--}}
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">QNA_Exam Show</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-{{--            </form>--}}
+                <div class="modal-body">
+                    <table class="table table-striped table-bordered table-hover table-sm">
+                        <thead>
+                        <tr>
+                            <th width="20px" class="pb-2">T/R</th>
+                            <th class="d-flex align-items-center justify-content-between">Questions <input type="search"
+                                                                                                           name="" id=""
+                                                                                                           placeholder="Qidiruv"
+                                                                                                           class="form-control-sm">
+                            </th>
+                            <th class="pb-2">O'chirish</th>
+                        </tr>
+                        </thead>
+                        <tbody id="showQnaExamsTable">
+
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer p-0 m-0">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Yopish</button>
+                </div>
+            </div>
+            {{--            </form>--}}
         </div>
     </div>
 
@@ -292,8 +296,8 @@
     </div>
 
     <script>
-        $(document).ready(function() {
-            $('#addQuestion').submit(function(e) {
+        $(document).ready(function () {
+            $('#addQuestion').submit(function (e) {
                 e.preventDefault();
                 let formData = $(this).serialize();
 
@@ -301,7 +305,7 @@
                     url: "{{ route('teacher.question.store') }}",
                     type: "POST",
                     data: formData,
-                    success: function(data) {
+                    success: function (data) {
                         if (data.success == true) {
                             location.reload();
                         } else {
@@ -311,14 +315,14 @@
                 });
             });
             {{-- Question update --}}
-        $('#editQuestion').submit(function(e) {
-            e.preventDefault();
-            let formData = $(this).serialize();
-            $.ajax({
-                url: "{{ route('teacher.question.update') }}",
+            $('#editQuestion').submit(function (e) {
+                e.preventDefault();
+                let formData = $(this).serialize();
+                $.ajax({
+                    url: "{{ route('teacher.question.update') }}",
                     type: "PUT",
                     data: formData,
-                    success: function(data) {
+                    success: function (data) {
                         if (data.success == true) {
                             location.reload();
                         } else {
@@ -329,18 +333,18 @@
             });
 
             {{-- Get  EDIT AJAX     --}}
-        $('.editButton').click(function(e) {
-            e.preventDefault();
-            let id = $(this).attr('data-id');
-            document.getElementById('edit_question_id').value = id;
-            let url = '{{ route('teacher.question.getData', 'id') }}';
+            $('.editQuestionButton').click(function (e) {
+                e.preventDefault();
+                let id = $(this).attr('data-id');
+                document.getElementById('edit_question_id').value = id;
+                let url = '{{ route('teacher.question.getData', 'id') }}';
 
                 url = url.replace('id', id);
 
                 $.ajax({
                     url: url,
                     type: "GET",
-                    success: function(data) {
+                    success: function (data) {
                         if (data.success == true) {
                             var question = data.data[0];
                             $("#edit_name").val(question.name);
@@ -356,22 +360,22 @@
 
 
             {{-- Get QuestionItems --}}
-        $(".addQuestionItems").click(function(e) {
-            e.preventDefault();
-            let id = $(this).attr('data-id');
-            let question_id = document.getElementById('questionId').value = id;
+            $(".addQuestionItems").click(function (e) {
+                e.preventDefault();
+                let id = $(this).attr('data-id');
+                let question_id = document.getElementById('questionId').value = id;
 
-            let formData = $(this).serialize();
+                let formData = $(this).serialize();
 
 
-            $.ajax({
-                url: "{{ route('teacher.questionItems.getQuestionItems') }}",
+                $.ajax({
+                    url: "{{ route('teacher.questionItems.getQuestionItems') }}",
                     type: "GET",
                     data: {
                         question_id: question_id
                     },
 
-                    success: function(data) {
+                    success: function (data) {
                         let questionItems = data.data;
                         let html = '';
 
@@ -401,19 +405,17 @@
             });
 
 
-
-
             {{--ADD QNAEXAMS--}}
-        $("#addQNA").submit(function(e) {
-            e.preventDefault();
+            $("#addQNA").submit(function (e) {
+                e.preventDefault();
 
-            let formData = $(this).serialize();
+                let formData = $(this).serialize();
 
-            $.ajax({
-                url: "{{ route('teacher.questionItems.setData') }}",
+                $.ajax({
+                    url: "{{ route('teacher.questionItems.setData') }}",
                     type: "POST",
                     data: formData,
-                    success: function(data) {
+                    success: function (data) {
                         if (data.success == true) {
                             location.reload();
                         } else {
@@ -425,7 +427,7 @@
 
 
             {{--Show Question--}}
-            $(".showButton").click(function(e) {
+            $(".showButton").click(function (e) {
                 e.preventDefault();
 
                 let id = $(this).attr('data-id');
@@ -436,7 +438,7 @@
                     data: {
                         question_id: id
                     },
-                    success: function(data) {
+                    success: function (data) {
                         console.log(data.data)
                         let question = data.data;
                         let html = '';
@@ -490,35 +492,34 @@
             });
 
 
-
-            $(".showQnaExams").click(function(e){
+            $(".showQnaExams").click(function (e) {
                 e.preventDefault();
                 let question_id = $(this).attr('data-id');
 
                 $.ajax({
                     url: "{{route('teacher.question.getQnaExams')}}",
-                    type:"GET",
-                    data:{question_id:question_id},
-                    success:function(data){
+                    type: "GET",
+                    data: {question_id: question_id},
+                    success: function (data) {
                         let html = '';
                         let questionItems = data.data;
 
-                        if(questionItems != 0){
-                             for(let i = 0; i < questionItems.length; i++){
+                        if (questionItems != 0) {
+                            for (let i = 0; i < questionItems.length; i++) {
                                 html += `
                                     <tr>
-                                        <td>`+ (i+1) +`</td>
-                                        <td>`+ questionItems[i]['question_items'][0]['question'] +`</td>
+                                        <td>` + (i + 1) + `</td>
+                                        <td>` + questionItems[i]['question_items'][0]['question'] + `</td>
                                         <td width="10px">
-                                            <button class="btn btn-outline-danger btn-sm deleteQnaExams" data-id="`+ questionItems[i]['id'] +`">
+                                            <button class="btn btn-outline-danger btn-sm deleteQnaExams" data-id="` + questionItems[i]['id'] + `">
                                                 <i class="fa fa-trash text-danger"></i>
                                             </button>
                                         </td>
                                     </tr>
                                 `;
                             }
-                        }else{
-                            html +=`
+                        } else {
+                            html += `
                                 <tr>
                                     <td colspan="2">
                                         Savollar yo'q
@@ -533,7 +534,7 @@
                 });
             });
 
-            $(document).on('click', '.deleteQnaExams', function(e){
+            $(document).on('click', '.deleteQnaExams', function (e) {
                 e.preventDefault();
                 let qnaExamId = $(this).attr('data-id');
 
@@ -541,26 +542,26 @@
 
                 let obj = $(this);
 
-                if(check == true){
+                if (check == true) {
                     $.ajax({
-                        url:"{{route('teacher.qnaExam.delete')}}",
-                        type:"GET",
-                        data:{qnaExamId:qnaExamId},
-                        success:function(data){
-                            if(data.success == true){
+                        url: "{{route('teacher.qnaExam.delete')}}",
+                        type: "GET",
+                        data: {qnaExamId: qnaExamId},
+                        success: function (data) {
+                            if (data.success == true) {
                                 obj.parent().parent().remove();
-                            }else{
+                            } else {
                                 alert(data.msg);
                             }
                         }
                     });
-                }else{
+                } else {
                     alert("Xatolik yuz berdi");
                 }
             });
 
 
-            $("#search").keyup(function() {
+            $("#search").keyup(function () {
                 let input, filter, table, tr, td, i, txtValue;
                 input = document.getElementById("search");
                 filter = input.value.toUpperCase();
@@ -580,16 +581,13 @@
                 }
             });
 
-            document.getElementById('deleteForm').addEventListener('submit', function(event) {
+            document.getElementById('deleteForm').addEventListener('submit', function (event) {
                 event.preventDefault();
 
                 if (confirm('Haqiqatan ham ma\'lumotni o\'chirmoqchimisiz?')) {
                     this.submit();
                 }
             });
-
-
-
 
 
             $('select').selectpicker();

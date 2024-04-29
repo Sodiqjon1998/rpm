@@ -2,13 +2,14 @@
 
 namespace App\Models\Teacher;
 
+use App\Models\ExamsAttempt;
 use App\Models\QnaExams;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
- * 
+ *
  *
  * @property int $id
  * @property string $name
@@ -56,5 +57,23 @@ class Question extends \App\Models\Question
     public function getQnaExam():HasMany
     {
         return $this->hasMany(QnaExams::class, 'question_id', 'id');
+    }
+
+
+
+    protected $appends = ['attempt_counter'];
+
+    public $count = 0;
+
+    public function getIdAttributes($value)
+    {
+        $attemptCount = ExamsAttempt::where(['exam_id' => $value, 'user_id' => \Auth::user()->id])->count();
+        $this->count = $attemptCount;
+        return $this->count;
+    }
+
+    public function getAttemptCounterAttribute()
+    {
+        return $this->count;
     }
 }

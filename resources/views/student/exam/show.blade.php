@@ -70,7 +70,7 @@
 
             $('.time').text(time[0] + ':' + time[1] + ':00');
 
-            let second = 59;
+            let second = 4;
             let hours = parseInt(time[0]);
             let minutes = parseInt(time[1]);
 
@@ -83,12 +83,12 @@
 
                 if(second <= 0){
                     minutes--;
-                    second = 59;
+                    second = 4;
                 }
 
                 if(minutes <= 0 && hours != 0){
                     hours--;
-                    second = 59;
+                    second = 4
                     minutes = 59;
                 }
 

@@ -26,7 +26,15 @@ class ExamController extends Controller
     {
         $exam = Question::with('getQnaExam')->where('enterance_id', $id)->get();
         if (count($exam) > 0) {
-            if ($exam[0]['date'] == date('Y-m-d')) {
+            $attemptCount = ExamsAttempt::where(['exam_id' => $exam[0]['id'], 'user_id' => \Auth::user()->id])->count();
+            if($attemptCount >= $exam[0]['attempt']){
+                return view('student.exam.show', [
+                    'success' => false,
+                    'msg' => 'Urunishlar qolmadi',
+                    'exam' => $exam
+                ]);
+            }
+            else if ($exam[0]['date'] == date('Y-m-d')) {
                 if (count($exam[0]['getQnaExam']) > 0) {
                     $qnAnswers = QnaExams::where('question_id', $exam[0]['id'])->with('questionItems', 'answers')->inRandomOrder()->get();
                     return view('student.exam.show', [
