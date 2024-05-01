@@ -16,7 +16,7 @@
                 <h6 class="text-right time">
                     {{$exam[0]['time']}}
                 </h6>
-                <form action="{{route('submitExam')}}" method="POST" id="exam_form" class="mb-5">
+                <form action="{{route('submitExam')}}" method="POST" id="exam_form" onsubmit="isValid()" class="mb-5">
                     @csrf
                     <input type="hidden" name="exam_id" id="" value="{{$exam[0]['id']}}">
                     @foreach($qnAnswers as $key => $question)
@@ -66,41 +66,103 @@
 
             let time = @json($time);
 
-            console.log(time);
+            let storedHours = localStorage.getItem("hours");
+            let storedMinutes = localStorage.getItem("minutes");
+            let storedSecond = localStorage.getItem("second");
 
-            $('.time').text(time[0] + ':' + time[1] + ':00');
+// Initialize timer variables with stored values or default to initial values
+            let hours = storedHours ? parseInt(storedHours) : parseInt(time[0]);
+            let minutes = storedMinutes ? parseInt(storedMinutes) : parseInt(time[1]);
+            let second = storedSecond ? parseInt(storedSecond) : 59;
 
-            let second = 4;
-            let hours = parseInt(time[0]);
-            let minutes = parseInt(time[1]);
+// Function to handle timer logic
+            function startTimer() {
+                let timer = setInterval(function () {
+                    if(hours == 0 && minutes == 0 && second == 0){
+                        clearInterval(timer);
+                        localStorage.clear();
+                        $("#exam_form").submit();
 
-            let timer = setInterval(function () {
+                    }
 
-                if(hours == 0 && minutes == 0 && second == 0){
-                    clearInterval(timer);
-                    $("#exam_form").submit();
-                }
+                    if(second <= 0){
+                        minutes--;
+                        second = 59;
+                    }
 
-                if(second <= 0){
-                    minutes--;
-                    second = 4;
-                }
+                    if(minutes <= 0 && hours != 0){
+                        hours--;
+                        minutes = 59;
+                        second = 59;
+                    }
 
-                if(minutes <= 0 && hours != 0){
-                    hours--;
-                    second = 4
-                    minutes = 59;
-                }
+                    let tempHours = hours.toString().padStart(2, '0');
+                    let tempMinutes = minutes.toString().padStart(2, '0');
+                    let tempSecond = second.toString().padStart(2, '0');
 
-                let tempHours = hours.toString().length > 1 ? hours:'0' + hours;
-                let tempMinutes = minutes.toString().length > 1 ? minutes:'0' + minutes;
-                let tempSecond = second.toString().length > 1 ? second:'0' + second;
+                    $('.time').text(tempHours + ':' + tempMinutes + ':'+ tempSecond);
 
-                $('.time').text(tempHours + ':' + tempMinutes + ':'+ tempSecond);
+                    // Update localStorage with current timer state
+                    localStorage.setItem("second", second.toString());
+                    localStorage.setItem("minutes", minutes.toString());
+                    localStorage.setItem("hours", hours.toString());
 
-                second--;
-            }, 1000);
+                    second--;
+                }, 1000);
+            }
 
+// Call the function to start the timer
+            startTimer();
+
+
+
+
+
+//             $('.time').text(time[0] + ':' + time[1] + ':00');
+//
+//             let second = 59;
+//             let hours = parseInt(time[0]);
+//             let minutes = parseInt(time[1]);
+//
+//             localStorage.setItem("second", second.toString());
+//             localStorage.setItem("minute", minutes.toString());
+//             localStorage.setItem("hours", hours.toString());
+//
+//
+//             let timer = setInterval(function () {
+//
+//                 if(hours == 0 && minutes == 0 && second == 0){
+//                     clearInterval(timer);
+//                     $("#exam_form").submit();
+//                 }
+//
+//                 if(second <= 0){
+//                     minutes--;
+//                     second = 59;
+//                 }
+//
+//                 if(minutes <= 0 && hours != 0){
+//                     hours--;
+//                     second = 59
+//                     minutes = 59;
+//                 }
+//
+//
+//                 let tempHours = hours.toString().length > 1 ? hours:'0' + hours;
+//                 let tempMinutes = minutes.toString().length > 1 ? minutes:'0' + minutes;
+//                 let tempSecond = second.toString().length > 1 ? second:'0' + second;
+//
+//                 $('.time').text(tempHours + ':' + tempMinutes + ':'+ tempSecond);
+//
+//                 second--;
+//
+//                 localStorage.setItem("second", tempSecond.toString());
+//                 localStorage.setItem("minute", tempMinutes.toString());
+//                 localStorage.setItem("hours", tempHours.toString());
+//
+//                 // console.log(localStorage.getItem('hours') + " : " + localStorage.getItem('minute')+ " : " + localStorage.getItem('second')[1]);
+//
+//             }, 1000);
 
         });
 
