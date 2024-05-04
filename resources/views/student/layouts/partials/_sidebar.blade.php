@@ -5,7 +5,7 @@
         <!-- User details -->
         <div class="user-profile text-center mt-3">
             <div class="">
-                <img src="{{ asset('assets/images/users/avatar-1.jpg') }}" alt="" class="avatar-md rounded-circle">
+                <img src="{{ asset('images/staticImages/gl.png') }}" alt="" class="avatar-md rounded-circle">
             </div>
             <div class="mt-3">
                 <h4 class="font-size-16 mb-1">{{Auth::user()->name}}</h4>
@@ -28,6 +28,13 @@
                 </li>
 
                 <li class="menu-title">Components</li>
+
+                <li>
+                    <a href="{{route('exam.index')}}" class="waves-effect">
+                        <i class="ri-question-fill"></i>
+                        <span>Imtixonlar</span>
+                    </a>
+                </li>
 
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">

@@ -4,25 +4,32 @@
 
     <div class="container">
 
-        Xush kelibsiz! {{Auth::user()->name}}
-        <h1 class="display-6 text-center">{{$exam[0]['name']}}</h1>
+        Xush kelibsiz! {{Auth::user()->name}} <img src="{{asset('images/staticImages/welStudent.png')}}" width="35px" alt="">
+        <h1 class="display-6 text-center">{{$exam[0]['name']}} <img
+                src="{{asset('images/staticImages/book.png')}}" alt="" width="45px"></h1>
         @php
             $time = explode(':', $exam[0]['time']);
+            $date = explode('-', $exam[0]['date']);
+
         @endphp
 
         @php $qcount = 1; @endphp
         @if($success == true)
             @if(count($qnAnswers) > 0)
-                <h6 class="text-right time">
-                    {{$exam[0]['time']}}
+                <h6 class="text-right">
+                    <img src="{{asset('images/staticImages/time.png')}}" width="25px" alt="">
+                    <span class="time">
+                        {{$exam[0]['time']}}
+                    </span>
                 </h6>
-                <form action="{{route('submitExam')}}" method="POST" id="exam_form" onsubmit="isValid()" class="mb-5">
+                <form action="{{route('submitExam')}}" method="POST" id="exam_form" class="mb-5">
                     @csrf
                     <input type="hidden" name="exam_id" id="" value="{{$exam[0]['id']}}">
                     @foreach($qnAnswers as $key => $question)
                         <div class="card">
                             <h5 class="card-header">
                                 Q.{{$qcount++}} {{$question['questionItems'][0]['question']}}
+                                <img src="{{asset('images/staticImages/shot.png')}}" width="30px" class="float-end" alt="">
                             </h5>
                             <input type="hidden" name="q[]" id="" value="{{$question['questionItems'][0]['id']}}">
                             <input type="hidden" name="ans_{{$qcount-1}}" id="ans_{{$qcount-1}}">
@@ -42,7 +49,8 @@
                         </div>
                     @endforeach
                     <div class="text-center">
-                        <input type="submit" name="" id="" class="btn btn-success btn-sm" value="Testni yakunlash">
+                        <input type="submit" name="" id="sendAnswer" class="btn btn-success btn-sm"
+                               value="Testni yakunlash">
                     </div>
                 </form>
             @else
@@ -58,122 +66,97 @@
     </div>
 
     <script>
-        $(document).ready(function(){
-            $(".select_ans").click(function(){
+
+        $(document).ready(function () {
+
+            $(".select_ans").click(function () {
                 let no = $(this).attr('data-id');
-                let val = $("#ans_"+no).val($(this).val());
+                let val = $("#ans_" + no).val($(this).val());
             });
 
-            let time = @json($time);
+            let date = @json($exam[0]['date']);
 
-            let storedHours = localStorage.getItem("hours");
-            let storedMinutes = localStorage.getItem("minutes");
-            let storedSecond = localStorage.getItem("second");
+            let bugun = new Date();
 
-// Initialize timer variables with stored values or default to initial values
-            let hours = storedHours ? parseInt(storedHours) : parseInt(time[0]);
-            let minutes = storedMinutes ? parseInt(storedMinutes) : parseInt(time[1]);
-            let second = storedSecond ? parseInt(storedSecond) : 59;
+            let month = bugun.getMonth() + 1;
+            let day = bugun.getDate();
 
-// Function to handle timer logic
-            function startTimer() {
-                let timer = setInterval(function () {
-                    if(hours == 0 && minutes == 0 && second == 0){
-                        clearInterval(timer);
-                        localStorage.clear();
-                        $("#exam_form").submit();
+            let sana = bugun.getFullYear() + '-' + month.toString().padStart(2, '0') + '-' + day.toString().padStart(2, '0');
 
-                    }
+            if (sana == date) {
+                let time = @json($time);
 
-                    if(second <= 0){
-                        minutes--;
-                        second = 59;
-                    }
 
-                    if(minutes <= 0 && hours != 0){
-                        hours--;
-                        minutes = 59;
-                        second = 59;
-                    }
+                let storedHours = localStorage.getItem("hours");
+                let storedMinutes = localStorage.getItem("minutes");
+                let storedSecond = localStorage.getItem("second");
 
-                    let tempHours = hours.toString().padStart(2, '0');
-                    let tempMinutes = minutes.toString().padStart(2, '0');
-                    let tempSecond = second.toString().padStart(2, '0');
+                let hours = storedHours ? parseInt(storedHours) : parseInt(time[0]);
+                let minutes = storedMinutes ? parseInt(storedMinutes) : parseInt(time[1]);
+                let second = storedSecond ? parseInt(storedSecond) : 59;
 
-                    $('.time').text(tempHours + ':' + tempMinutes + ':'+ tempSecond);
+                $('.time').text(hours + ':' + minutes + ':' + second);
 
-                    // Update localStorage with current timer state
-                    localStorage.setItem("second", second.toString());
-                    localStorage.setItem("minutes", minutes.toString());
-                    localStorage.setItem("hours", hours.toString());
+                function startTimer() {
+                    let timer = setInterval(function () {
 
-                    second--;
-                }, 1000);
+                        localStorage.setItem("second", second.toString());
+                        localStorage.setItem("minutes", minutes.toString());
+                        localStorage.setItem("hours", hours.toString());
+
+                        if (hours == 0 && minutes == 0 && second == 0) {
+                            clearInterval(timer);
+                            localStorage.clear();
+                            $("#exam_form").submit();
+                        }
+
+                        if (second <= 0) {
+                            minutes--;
+                            second = 59;
+                        }
+
+                        if (minutes <= 0 && hours != 0) {
+                            hours--;
+                            minutes = 59;
+                            second = 59;
+                        }
+
+                        let tempHours = hours.toString().padStart(2, '0');
+                        let tempMinutes = minutes.toString().padStart(2, '0');
+                        let tempSecond = second.toString().padStart(2, '0');
+
+                        $('.time').text(tempHours + ':' + tempMinutes + ':' + tempSecond);
+
+
+                        second--;
+                    }, 1000);
+
+                    $("#sendAnswer").click(function (e) {
+                        e.preventDefault();
+                        let check = confirm("Testni yakunlamoqchimisiz?");
+
+                        if (check) {
+                            clearInterval(timer); // timer ni avtomatik to'zalash
+                            localStorage.clear();
+                            $("#exam_form").submit();
+                        }
+                    });
+                }
+
+
+                startTimer();
             }
-
-// Call the function to start the timer
-            startTimer();
-
-
-
-
-
-//             $('.time').text(time[0] + ':' + time[1] + ':00');
-//
-//             let second = 59;
-//             let hours = parseInt(time[0]);
-//             let minutes = parseInt(time[1]);
-//
-//             localStorage.setItem("second", second.toString());
-//             localStorage.setItem("minute", minutes.toString());
-//             localStorage.setItem("hours", hours.toString());
-//
-//
-//             let timer = setInterval(function () {
-//
-//                 if(hours == 0 && minutes == 0 && second == 0){
-//                     clearInterval(timer);
-//                     $("#exam_form").submit();
-//                 }
-//
-//                 if(second <= 0){
-//                     minutes--;
-//                     second = 59;
-//                 }
-//
-//                 if(minutes <= 0 && hours != 0){
-//                     hours--;
-//                     second = 59
-//                     minutes = 59;
-//                 }
-//
-//
-//                 let tempHours = hours.toString().length > 1 ? hours:'0' + hours;
-//                 let tempMinutes = minutes.toString().length > 1 ? minutes:'0' + minutes;
-//                 let tempSecond = second.toString().length > 1 ? second:'0' + second;
-//
-//                 $('.time').text(tempHours + ':' + tempMinutes + ':'+ tempSecond);
-//
-//                 second--;
-//
-//                 localStorage.setItem("second", tempSecond.toString());
-//                 localStorage.setItem("minute", tempMinutes.toString());
-//                 localStorage.setItem("hours", tempHours.toString());
-//
-//                 // console.log(localStorage.getItem('hours') + " : " + localStorage.getItem('minute')+ " : " + localStorage.getItem('second')[1]);
-//
-//             }, 1000);
 
         });
 
-        function isValid(){
+        function isValid() {
             let result = true;
-            let qLength = parseInt("{{$qcount}}")-1;
+            let qLength = parseInt("{{$qcount}}") - 1;
 
-            for(let  i = 1; i <= qLength; i++){
-                if($('#ans_'+i).val() == ""){
+            for (let i = 1; i <= qLength; i++) {
+                if ($('#ans_' + i).val() == "") {
                     result = false;
-                    $("#ans_"+i).parent().append("<span class='btn btn-warning btn-sm mb-3 ml-3 error_msg'>Javob tanlang!</span>");
+                    $("#ans_" + i).parent().append("<span class='btn btn-warning btn-sm mb-3 ml-3 error_msg'>Javob tanlang!</span>");
                     setTimeout(() => {
                         $(".error_msg").remove();
                     }, 5000);
@@ -182,7 +165,6 @@
 
             return result;
         }
-
 
     </script>
 

@@ -1,9 +1,14 @@
+@php use App\Models\Question; @endphp
 @extends('student.layouts.main')
 
 
 @section('content')
 
-    <h6 class="display-6 text-center">Barcha fanlardan test savollari</h6>
+    <h6 class="display-6 text-center">
+        <img src="{{asset('images/staticImages/qa.png')}}" width="55" alt="">
+        Barcha fanlardan test savollari
+    </h6>
+    <hr>
 
     <div class="row">
         @foreach($exams as $exam)
@@ -13,10 +18,14 @@
                     <div class="card-body">
                         <div class="d-flex">
                             <div class="flex-grow-1">
-                                <p class="text-truncate font-size-14 mb-2">Mavzu: {{$exam->quiz->name}} &nbsp;&nbsp; <a
+                                <p class="text-truncate font-size-14 mb-2">
+                                    Mavzu: {{$exam->quiz->name}} &nbsp;&nbsp;
+                                    <i class="fa fa-chalkboard-teacher"></i> {{Question::getTeacher($exam->quiz->teacher_id)->name}} &nbsp;
+                                    <a
                                         href="#" data-code="{{$exam->enterance_id}}" class="copied">
                                         <i class="ri-file-copy-2-fill"></i>
-                                    </a></p>
+                                    </a>
+                                </p>
                                 <h4 class="mb-2">
                                     {{$exam->name}}
                                 </h4>
@@ -25,15 +34,17 @@
                                         <i class="ri-alarm-line me-1 align-middle"></i>{{date('M d, Y', strtotime($exam->date))}}
                                         <i class="ri-time-fill"></i> {{$exam->time}}
                                     </span>
+                                    <br>
                                     Urunishlar soni: {{$exam->attempt - $exam->getIdAttributes($exam->id)}}
-                                    <a href="{{route('exam.show', $exam->enterance_id)}}" class="btn btn-link btn-sm">
+                                    <a href="{{route('exam.show', $exam->enterance_id)}}"
+                                       class="btn btn-outline-info btn-sm">
                                         <i class="ri-link"></i>
                                     </a>
                                 </p>
                             </div>
                             <div class="avatar-sm">
-                            <span class="avatar-title bg-light text-success rounded-3">
-                                <i class="ri-book-2-fill font-size-24"></i>
+                            <span class=" rounded-3 p-0 m-0">
+                                <img src="{{asset('images/staticImages/q.png')}}" alt="" width="45">
                             </span>
                             </div>
                         </div>

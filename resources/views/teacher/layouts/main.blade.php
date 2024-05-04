@@ -112,7 +112,7 @@
 
 </head>
 
-<body data-topbar="dark" data-sidebar="dark">
+<body data-topbar="dark" data-sidebar="dark" style="background: url({{asset('images/staticImages/bg2.png')}})">
 
     <!-- Begin page -->
     <div id="layout-wrapper">

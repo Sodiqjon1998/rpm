@@ -38,4 +38,12 @@ use Illuminate\Database\Eloquent\Model;
 class Question extends Model
 {
     use HasFactory;
+
+
+
+    public static function getTeacher($id)
+    {
+        $teacher = User::find($id);
+        return $teacher;
+    }
 }
