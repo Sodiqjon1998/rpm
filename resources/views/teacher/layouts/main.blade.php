@@ -44,10 +44,11 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <style>
         /* Switch starts here */
-        .dropdown-toggle{
+        .dropdown-toggle {
             height: 40px;
             width: 400px !important;
         }
+
         .toggle-border {
             border: 2px solid #f0ebeb;
             border-radius: 130px;
@@ -103,7 +104,8 @@
     </style>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" />
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
@@ -112,7 +114,7 @@
 
 </head>
 
-<body data-topbar="dark" data-sidebar="dark" style="background: url({{asset('images/staticImages/bg2.png')}})">
+<body data-topbar="dark" data-sidebar="dark" style="background: url({{ asset('images/staticImages/bg2.png') }})">
 
     <!-- Begin page -->
     <div id="layout-wrapper">
@@ -154,7 +156,7 @@
     <div class="rightbar-overlay"></div>
 
     <!-- JAVASCRIPT -->
-{{--    <script src="{{ asset('assets/libs/jquery/jquery.min.js') }}"></script>--}}
+    {{--    <script src="{{ asset('assets/libs/jquery/jquery.min.js') }}"></script> --}}
     <script src="{{ asset('assets/libs/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('assets/libs/metismenu/metisMenu.min.js') }}"></script>
     <script src="{{ asset('assets/libs/simplebar/simplebar.min.js') }}"></script>

@@ -1,4 +1,4 @@
-<div class="vertical-menu">
+<div class="vertical-menu" style="background: url({{asset('images/staticImages/backend/bg2.png')}});">
 
     <div data-simplebar class="h-100">
 

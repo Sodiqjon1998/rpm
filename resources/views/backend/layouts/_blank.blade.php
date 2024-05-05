@@ -2,7 +2,7 @@
 <html lang="en">
 
     <head>
-        
+
         <meta charset="utf-8" />
         <title>Admin login</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -20,19 +20,19 @@
 
     </head>
 
-    <body class="auth-body-bg">
+    <body class="auth-body-bg" style="background: url({{asset('images/staticImages/bg2.png')}});">
         <div class="bg-overlay"></div>
         <div class="wrapper-page">
             <div class="container-fluid p-0">
 
                 @yield('content')
-                
+
                 <!-- end card -->
             </div>
             <!-- end container -->
         </div>
         <!-- end -->
-        
+
 
         <!-- JAVASCRIPT -->
         <script src="{{asset('assets/libs/jquery/jquery.min.js')}}"></script>

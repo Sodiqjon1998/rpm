@@ -47,7 +47,7 @@
 
 </head>
 
-<body>
+<body style="background: url({{asset('images/staticImages/bg2.png')}});">
 
 <div style="display: flex; justify-content: center; align-items: center; height: 100vh;">
     @yield('content')

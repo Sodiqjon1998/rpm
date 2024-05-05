@@ -1,7 +1,7 @@
 @extends('teacher.layouts._blank')
 
 @section('content')
-    <div class="card">
+    <div class="card" style="background: url({{asset('images/staticImages/backend/bg2.png')}});">
         <div class="card-body">
 
             <div class="text-center mt-4">

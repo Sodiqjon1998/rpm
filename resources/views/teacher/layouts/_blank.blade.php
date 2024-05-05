@@ -20,7 +20,7 @@
 
     </head>
 
-    <body class="auth-body-bg">
+    <body class="auth-body-bg" style="background: url({{asset('images/staticImages/bg2.png')}})">
         <div class="bg-overlay"></div>
         <div class="wrapper-page">
             <div class="container-fluid p-0">
