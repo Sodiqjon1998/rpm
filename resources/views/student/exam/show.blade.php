@@ -4,7 +4,8 @@
 
     <div class="container">
 
-        Xush kelibsiz! {{Auth::user()->name}} <img src="{{asset('images/staticImages/welStudent.png')}}" width="35px" alt="">
+        Xush kelibsiz! {{Auth::user()->name}} <img src="{{asset('images/staticImages/welStudent.png')}}" width="35px"
+                                                   alt="">
         <h1 class="display-6 text-center">{{$exam[0]['name']}} <img
                 src="{{asset('images/staticImages/book.png')}}" alt="" width="45px"></h1>
         @php
@@ -29,7 +30,8 @@
                         <div class="card">
                             <h5 class="card-header">
                                 Q.{{$qcount++}} {{$question['questionItems'][0]['question']}}
-                                <img src="{{asset('images/staticImages/shot.png')}}" width="30px" class="float-end" alt="">
+                                <img src="{{asset('images/staticImages/shot.png')}}" width="30px" class="float-end"
+                                     alt="">
                             </h5>
                             <input type="hidden" name="q[]" id="" value="{{$question['questionItems'][0]['id']}}">
                             <input type="hidden" name="ans_{{$qcount-1}}" id="ans_{{$qcount-1}}">
@@ -83,13 +85,17 @@
 
             let sana = bugun.getFullYear() + '-' + month.toString().padStart(2, '0') + '-' + day.toString().padStart(2, '0');
 
+            let getData = localStorage.getItem({{$exam[0]['id']}});
+            let parseData = JSON.parse(getData);
+            // console.log(as[{{$exam[0]['id']}}].second)
+
             if (sana == date) {
                 let time = @json($time);
 
 
-                let storedHours = localStorage.getItem("hours");
-                let storedMinutes = localStorage.getItem("minutes");
-                let storedSecond = localStorage.getItem("second");
+                let storedHours = localStorage.getItem("hours"); //parseData[{{$exam[0]['id']}}].hours
+                let storedMinutes = localStorage.getItem("minutes"); //parseData[{{$exam[0]['id']}}].minutes
+                let storedSecond = localStorage.getItem("second"); //parseData[{{$exam[0]['id']}}].second
 
                 let hours = storedHours ? parseInt(storedHours) : parseInt(time[0]);
                 let minutes = storedMinutes ? parseInt(storedMinutes) : parseInt(time[1]);
@@ -100,13 +106,22 @@
                 function startTimer() {
                     let timer = setInterval(function () {
 
-                        localStorage.setItem("second", second.toString());
-                        localStorage.setItem("minutes", minutes.toString());
-                        localStorage.setItem("hours", hours.toString());
+                        let data = {};
+                        data[{{ $exam[0]['id'] }}] = {
+                            'second': second.toString(),
+                            'minutes': minutes.toString(),
+                            'hours': hours.toString(),
+                        };
+
+                        localStorage.setItem('question', JSON.stringify(data));
+
+                        // localStorage.setItem("second", second.toString());
+                        // localStorage.setItem("minutes", minutes.toString());
+                        // localStorage.setItem("hours", hours.toString());
 
                         if (hours == 0 && minutes == 0 && second == 0) {
                             clearInterval(timer);
-                            localStorage.clear();
+                            localStorage.removeItem({{$exam[0]['id']}});
                             $("#exam_form").submit();
                         }
 
@@ -137,7 +152,7 @@
 
                         if (check) {
                             clearInterval(timer); // timer ni avtomatik to'zalash
-                            localStorage.clear();
+                            localStorage.removeItem({{$exam[0]['id']}});
                             $("#exam_form").submit();
                         }
                     });

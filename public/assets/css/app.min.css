@@ -1660,7 +1660,7 @@ body[data-layout=horizontal][data-layout-size=boxed] .container-fluid, body[data
     left: 0;
     top: 0;
     opacity: .7;
-    background-color: #000
+    /* background-color: #000 */
 }
 
 .flex-1 {
@@ -4243,7 +4243,7 @@ div.dt-button-info h2 {
 }
 
 .auth-body-bg .bg-overlay {
-    background: rgba(51, 51, 51, .97);
+    /* background: rgba(51, 51, 51, .97); */
     width: 100%;
     height: 100%;
     position: absolute;

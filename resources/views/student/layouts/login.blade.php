@@ -1,22 +1,25 @@
 @extends('student.layouts._blank')
 
 @section('content')
-    <div class="card">
+    <div class="card" style="background: url({{ asset('images/staticImages/backend/bg2.png') }});">
         <div class="card-body">
 
             <div class="text-center mt-4">
                 <div class="mb-3">
                     <a href="index.html" class="auth-logo">
-                        <img src="{{asset('assets/images/logo-dark.png')}}" height="30" class="logo-dark mx-auto" alt="">
-                        <img src="{{asset('assets/images/logo-light.png')}}" height="30" class="logo-light mx-auto" alt="">
+                        <img src="{{ asset('images/staticImages/logo.png') }}" height="40" class="logo-dark mx-auto"
+                            alt="">
+                        <img src="{{ asset('images/staticImages/logo.png') }}" height="40" class="logo-light mx-auto"
+                            alt="">
                     </a>
                 </div>
             </div>
 
-            <h4 class="text-muted text-center font-size-18"><b>Sign In</b></h4>
+            <h4 class="text-muted text-center font-size-18" style="color: white
+            "><b>Yuksalish</b></h4>
 
             <div class="p-3">
-                <form method="POST" class="form-horizontal mt-3" action="{{route('student.login')}}">
+                <form method="POST" class="form-horizontal mt-3" action="{{ route('student.login') }}">
                     @csrf
 
                     <div class="form-group mb-3 row">
@@ -27,7 +30,8 @@
 
                     <div class="form-group mb-3 row">
                         <div class="col-12">
-                            <input class="form-control" type="password" name="password" required="" placeholder="Password">
+                            <input class="form-control" type="password" name="password" required=""
+                                placeholder="Password">
                         </div>
                     </div>
 
