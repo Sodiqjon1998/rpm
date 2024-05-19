@@ -32,4 +32,8 @@ use Illuminate\Database\Eloquent\Model;
 class Answer extends Model
 {
     use HasFactory;
+
+    public static function getAnswer($id){
+        return self::findOrFail($id);
+    }
 }

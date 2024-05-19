@@ -6889,8 +6889,8 @@ textarea.form-control-lg {
   border: 0.25em solid currentColor;
   border-right-color: transparent;
   border-radius: 50%;
-  -webkit-animation: 0.75s linear infinite spinner-border;
-          animation: 0.75s linear infinite spinner-border;
+  -webkit-animation: 7s linear infinite spinner-border;
+          animation: 7s linear infinite spinner-border;
 }
 
 .spinner-border-sm {
@@ -6930,8 +6930,8 @@ textarea.form-control-lg {
   background-color: currentColor;
   border-radius: 50%;
   opacity: 0;
-  -webkit-animation: 0.75s linear infinite spinner-grow;
-          animation: 0.75s linear infinite spinner-grow;
+  -webkit-animation: 7s linear infinite spinner-grow;
+          animation: 7s linear infinite spinner-grow;
 }
 
 .spinner-grow-sm {

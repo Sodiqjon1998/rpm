@@ -36,4 +36,8 @@ class QuestionItem extends Model
     public function answers(){
         return $this->hasMany(Answer::class, 'item_id', 'id');
     }
+
+    public static function getQuestion($id){
+        return self::findOrFail($id);
+    }
 }

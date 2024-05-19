@@ -15,7 +15,7 @@ class ExamController extends Controller
 {
     public function index()
     {
-        $exams = Question::with('quiz')->orderBy('date')->get();
+        $exams = Question::with('quiz')->orderBy('date', 'DESC')->get();
 
         return view('student.exam.index', [
             'exams' => $exams
@@ -27,14 +27,13 @@ class ExamController extends Controller
         $exam = Question::with('getQnaExam')->where('enterance_id', $id)->get();
         if (count($exam) > 0) {
             $attemptCount = ExamsAttempt::where(['exam_id' => $exam[0]['id'], 'user_id' => \Auth::user()->id])->count();
-            if($attemptCount >= $exam[0]['attempt']){
+            if ($attemptCount >= $exam[0]['attempt']) {
                 return view('student.exam.show', [
                     'success' => false,
                     'msg' => 'Urunishlar qolmadi',
                     'exam' => $exam
                 ]);
-            }
-            else if ($exam[0]['date'] == date('Y-m-d')) {
+            } else if ($exam[0]['date'] == date('Y-m-d')) {
                 if (count($exam[0]['getQnaExam']) > 0) {
                     $qnAnswers = QnaExams::where('question_id', $exam[0]['id'])->with('questionItems', 'answers')->inRandomOrder()->get();
                     return view('student.exam.show', [
@@ -80,22 +79,32 @@ class ExamController extends Controller
         $qCount = count($request->q);
 
         for ($i = 0; $i < $qCount; $i++) {
-           if(!empty(request()->input('ans_' . ($i + 1)))){
-               ExamsAnswer::insert([
-                   'attempt_id' => $attempt_id,
-                   'question_item_id' => $request->q[$i],
-                   'answer_id' => request()->input('ans_' . ($i + 1)),
-                   'created_by' => Auth::user()->id,
-                   'updated_by' => Auth::user()->id
-               ]);
-           }
+            if (!empty(request()->input('ans_' . ($i + 1)))) {
+                ExamsAnswer::insert([
+                    'attempt_id' => $attempt_id,
+                    'question_item_id' => $request->q[$i],
+                    'answer_id' => request()->input('ans_' . ($i + 1)),
+                    'created_by' => Auth::user()->id,
+                    'updated_by' => Auth::user()->id
+                ]);
+            }
         }
 
-        return redirect()->route('thank-you');
+        return redirect()->route('thank-you', $request->exam_id);
     }
 
-    public function thankYou()
+    public function thankYou(string $exam_id)
     {
-        return view('student.exam.thank-you');
+        $attempts = ExamsAttempt::with(['examAnswers', 'exam', 'answer'])
+            ->where('exam_id', $exam_id)
+            ->where('user_id', Auth::user()->id)
+            ->orderBy('exam_id', 'DESC')
+            ->first();
+
+            // dd($attempts);
+
+        return view('student.exam.thank-you', [
+            'attempts' => $attempts
+        ]);
     }
 }

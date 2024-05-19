@@ -18,6 +18,6 @@ Route::group(['middleware' => ['auth.student', 'verified', 'student']], function
 
 
         Route::post('/exam/submit-exam', 'submitExam')->name('submitExam');
-        Route::get('/exam/thank-you', 'thankYou')->name('thank-you');
+        Route::get('/exam/thank-you/{id}', 'thankYou')->name('thank-you');
     });
 });

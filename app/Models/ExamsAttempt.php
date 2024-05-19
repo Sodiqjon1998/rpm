@@ -38,4 +38,16 @@ class ExamsAttempt extends Model
     protected $table = "exams_attempt";
 
     public $timestamps = false;
+
+    public function examAnswers(){
+        return $this->hasMany(ExamsAnswer::class, 'attempt_id', 'id');
+    }
+
+    public function exam(){
+        return $this->hasOne(Question::class, 'id', 'exam_id');
+    }
+
+    public function answer(){
+        return $this->hasOne(Answer::class, 'id', 'answer_id');
+    }
 }
