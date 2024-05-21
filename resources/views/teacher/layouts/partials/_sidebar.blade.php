@@ -51,7 +51,7 @@
                 <li>
                     <a href="{{route('teacher.groups.index')}}" class=" waves-effect">
                         <i class="ri-group-fill"></i>
-                        <span>Guruglar</span>
+                        <span>Guruhlar</span>
                     </a>
                 </li>
 

@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Teacher\GroupItemsController;
 use App\Http\Controllers\Teacher\GroupsController;
 use App\Http\Controllers\Teacher\QuestionController;

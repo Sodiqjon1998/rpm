@@ -98,6 +98,7 @@ class ExamController extends Controller
         $attempts = ExamsAttempt::with(['examAnswers', 'exam', 'answer'])
             ->where('exam_id', $exam_id)
             ->where('user_id', Auth::user()->id)
+            ->leftJoin('exams_answer', 'exams_attempt.id', '=', 'exams_answer.attempt_id')
             ->orderBy('exam_id', 'DESC')
             ->first();
 
