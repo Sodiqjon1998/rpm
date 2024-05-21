@@ -34,6 +34,27 @@
                     </a>
                 </li>
 
+                <li>
+                    <a href="{{route('teacher.quiz.index')}}" class=" waves-effect">
+                        <i class="ri-calendar-2-line"></i>
+                        <span>Quiz</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{{route('teacher.questionItems.index')}}" class=" waves-effect">
+                        <i class="ri-calendar-2-line"></i>
+                        <span>Imtixon savollari</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{{route('teacher.groups.index')}}" class=" waves-effect">
+                        <i class="ri-calendar-2-line"></i>
+                        <span>Guruglar</span>
+                    </a>
+                </li>
+
                 <li class="menu-title">Components</li>
 
                 <li>
