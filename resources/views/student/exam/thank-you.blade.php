@@ -13,8 +13,8 @@
                                 <tr>
                                     <td>
                                         {{ ++$key }}.
-                                        {{ QuestionItem::getQuestion($attempt->question_item_id)->question }} <img
-                                            src="{{ asset('images/staticImages/shot.png') }}" width="25px" class="float-end"
+                                        {{ QuestionItem::getQuestion($attempt->question_item_id)->question }}
+                                        <img src="{{ asset('images/staticImages/shot.png') }}" width="25px" class="float-end"
                                             alt="">
                                     </td>
                                 </tr>

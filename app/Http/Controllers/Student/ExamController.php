@@ -90,15 +90,16 @@ class ExamController extends Controller
             }
         }
 
-        return redirect()->route('thank-you', $request->exam_id);
+        return redirect()->route('thank-you', [$request->exam_id, $attempt_id]);
     }
 
-    public function thankYou(string $exam_id)
+    public function thankYou(string $exam_id, $attempt_id)
     {
-        $attempts = ExamsAttempt::with(['examAnswers', 'exam', 'answer'])
+        // dd($attempt_id);
+        $attempts = ExamsAttempt::with(['examAnswers', 'exam'])
+            ->where('id', $attempt_id)
             ->where('exam_id', $exam_id)
             ->where('user_id', Auth::user()->id)
-            ->leftJoin('exams_answer', 'exams_attempt.id', '=', 'exams_answer.attempt_id')
             ->orderBy('exam_id', 'DESC')
             ->first();
 
