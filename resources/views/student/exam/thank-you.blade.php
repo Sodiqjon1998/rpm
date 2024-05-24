@@ -1,5 +1,21 @@
 @php use App\Models\QuestionItem; @endphp
 @php use App\Models\Answer; @endphp
+
+<?php
+
+$isCorrectCount = 0;
+
+
+
+foreach ($attempts['examAnswers'] as $key => $value) {
+    if (Answer::getAnswer($value->answer_id)->is_correct == 1) {
+        ++$isCorrectCount;
+    }
+}
+
+$allCount = count($attempts['examAnswers']);
+
+?>
 @extends('student.layouts.main')
 
 @section('content')
@@ -55,6 +71,7 @@
                                 {{ $attempts['exam']['name'] }} <img src="{{ asset('images/staticImages/book.png') }}"
                                     alt="" width="25px">
                             </td>
+                        </tr>
                         <tr>
                             <th>
                                 O'quvchi
@@ -64,6 +81,22 @@
                                     width="25px" alt="">
                             </td>
                         </tr>
+                        <tr>
+                            <th>
+                                To'g'ri
+                            </th>
+                            <td>
+                                {{ $isCorrectCount }} ta
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Foiz</th>
+                            <td>
+                                <?php
+                                    $result = ($isCorrectCount*100)/$allCount;
+                                    echo round($result)."%";
+                                ?>
+                            </td>
                         </tr>
                     </table>
                 </div>
