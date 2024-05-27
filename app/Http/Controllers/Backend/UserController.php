@@ -123,9 +123,16 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id);
 
+        $user->groups()->delete();
+        $user->groupitems()->delete();
+
+        $user->delete();
+
         if (!$user) {
             return redirect()->back()->with(['error' => 'Ma\'lumot topilmadi'], 404);
         }
+
+        
 
         $user->delete();
         $deleteImage = Storage::disk('user')->delete($user->getOriginal('img'));

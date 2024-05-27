@@ -97,4 +97,12 @@ class User extends Authenticatable
 
         return !is_null($id) ? $types[$id] : $types;
     }
+
+    public function groups(){
+        return $this->hasMany(Group::class, 'id', 'teacher_id');
+    }
+
+    public function groupitems(){
+        return $this->hasMany(GroupItem::class, 'id', 'user_id');
+    }
 }
