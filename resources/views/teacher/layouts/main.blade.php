@@ -194,11 +194,17 @@
 
     <script src="{{ asset('assets/js/img.js') }}"></script>
 
+    <!--tinymce js-->
+    <script src="{{asset('assets/libs/tinymce/tinymce.min.js')}}"></script>
+
     <!-- Magnific Popup-->
     <script src="{{ asset('assets/libs/magnific-popup/jquery.magnific-popup.min.js') }}"></script>
 
     <!-- lightbox init js-->
     <script src="{{ asset('assets/js/pages/lightbox.init.js') }}"></script>
+
+     <!-- init js -->
+     <script src="{{asset('assets/js/pages/form-editor.init.js')}}"></script>
 
 
     <script>

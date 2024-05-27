@@ -97,6 +97,8 @@
         </div>
     </div>
 
+    
+
     <!-- Modal -->
     <div class="modal fade" id="addQuestionItemsModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
          aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -115,8 +117,9 @@
                         @csrf
                         <div class="row">
                             <div class="col">
-                                <input type="text" name="question" placeholder="Enter question" required id=""
-                                       class="w-100 form-control-sm">
+                                {{-- <input type="text" name="question" placeholder="Enter question" required id=""
+                                       class="w-100 form-control-sm"> --}}
+                                       <textarea id="elm1" name="question" required ></textarea>
                             </div>
                         </div>
                     </div>
