@@ -3,11 +3,11 @@
 
 <head>
 
-    <meta charset="utf-8"/>
+    <meta charset="utf-8" />
     <title>Dashboard | Upcube - Admin & Dashboard Template</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta content="Premium Multipurpose Admin & Dashboard Template" name="description"/>
-    <meta content="Themesdesign" name="author"/>
+    <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
+    <meta content="Themesdesign" name="author" />
     <!-- App favicon -->
     <link rel="shortcut icon" href="{{ asset('assets/images/favicon.ico') }}">
 
@@ -20,27 +20,27 @@
 
     <!-- jquery.vectormap css -->
     <link href="{{ asset('assets/libs/admin-resources/jquery.vectormap/jquery-jvectormap-1.2.2.css') }}"
-          rel="stylesheet" type="text/css"/>
+        rel="stylesheet" type="text/css" />
 
     <!-- DataTables -->
     <link href="{{ asset('assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css') }}" rel="stylesheet"
-          type="text/css"/>
+        type="text/css" />
 
     <!-- Responsive datatable examples -->
     <link href="{{ asset('assets/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css') }}"
-          rel="stylesheet" type="text/css"/>
+        rel="stylesheet" type="text/css" />
 
     <!-- Bootstrap Css -->
-    <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css"/>
+    <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
     <!-- Icons Css -->
-    <link href="{{ asset('assets/css/icons.min.css') }}" rel="stylesheet" type="text/css"/>
+    <link href="{{ asset('assets/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
     <!-- App Css-->
-    <link href="{{ asset('assets/css/app.min.css') }}" rel="stylesheet" type="text/css"/>
+    <link href="{{ asset('assets/css/app.min.css') }}" rel="stylesheet" type="text/css" />
 
-    <link href="{{ asset('assets/css/img.css') }}" rel="stylesheet" type="text/css"/>
+    <link href="{{ asset('assets/css/img.css') }}" rel="stylesheet" type="text/css" />
 
     <!-- Lightbox css -->
-    <link href="{{ asset('assets/libs/magnific-popup/magnific-popup.css') }}" rel="stylesheet" type="text/css"/>
+    <link href="{{ asset('assets/libs/magnific-popup/magnific-popup.css') }}" rel="stylesheet" type="text/css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <style>
         /* Switch starts here */
@@ -76,7 +76,7 @@
             transition: background .5s;
         }
 
-        .toggle-border input[type="checkbox"]:checked + label {
+        .toggle-border input[type="checkbox"]:checked+label {
             background: #13d162;
         }
 
@@ -93,7 +93,7 @@
             transition: left .4s;
         }
 
-        .toggle-border input[type="checkbox"]:checked + label > .handle {
+        .toggle-border input[type="checkbox"]:checked+label>.handle {
             left: calc(100% - 35px + 10px);
         }
     </style>
@@ -102,93 +102,93 @@
 
 </head>
 
-<body data-topbar="dark" data-sidebar="dark" style="background: url({{asset('images/staticImages/bg2.png')}})">
+<body data-topbar="dark" data-sidebar="dark" style="background: url({{ asset('images/staticImages/bg2.png') }})">
 
-<!-- Begin page -->
-<div id="layout-wrapper">
-
-
-    @include('backend.layouts.partials._header')
-
-    <!-- ========== Left Sidebar Start ========== -->
-    @include('backend.layouts.partials._sidebar')
-    <!-- Left Sidebar End -->
+    <!-- Begin page -->
+    <div id="layout-wrapper">
 
 
-    <!-- ============================================================== -->
-    <!-- Start right Content here -->
-    <!-- ============================================================== -->
-    <div class="main-content">
+        @include('backend.layouts.partials._header')
 
-        <div class="page-content">
-            <div class="container-fluid">
-                @yield('content')
+        <!-- ========== Left Sidebar Start ========== -->
+        @include('backend.layouts.partials._sidebar')
+        <!-- Left Sidebar End -->
+
+
+        <!-- ============================================================== -->
+        <!-- Start right Content here -->
+        <!-- ============================================================== -->
+        <div class="main-content">
+
+            <div class="page-content">
+                <div class="container-fluid">
+                    @yield('content')
+                </div>
+                <!-- container-fluid -->
             </div>
-            <!-- container-fluid -->
+            <!-- End Page-content -->
+
+            @include('backend.layouts.partials._footer')
         </div>
-        <!-- End Page-content -->
+        <!-- end main content-->
 
-        @include('backend.layouts.partials._footer')
     </div>
-    <!-- end main content-->
+    <!-- END layout-wrapper -->
 
-</div>
-<!-- END layout-wrapper -->
+    <!-- Right Sidebar -->
+    @include('backend.layouts.partials._rightbar')
+    <!-- /Right-bar -->
 
-<!-- Right Sidebar -->
-@include('backend.layouts.partials._rightbar')
-<!-- /Right-bar -->
+    <!-- Right bar overlay-->
+    <div class="rightbar-overlay"></div>
 
-<!-- Right bar overlay-->
-<div class="rightbar-overlay"></div>
-
-<!-- JAVASCRIPT -->
-{{--    <script src="{{ asset('assets/libs/jquery/jquery.min.js') }}"></script>--}}
-<script src="{{ asset('assets/libs/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-<script src="{{ asset('assets/libs/metismenu/metisMenu.min.js') }}"></script>
-<script src="{{ asset('assets/libs/simplebar/simplebar.min.js') }}"></script>
-<script src="{{ asset('assets/libs/node-waves/waves.min.js') }}"></script>
+    <!-- JAVASCRIPT -->
+    {{--    <script src="{{ asset('assets/libs/jquery/jquery.min.js') }}"></script> --}}
+    <script src="{{ asset('assets/libs/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('assets/libs/metismenu/metisMenu.min.js') }}"></script>
+    <script src="{{ asset('assets/libs/simplebar/simplebar.min.js') }}"></script>
+    <script src="{{ asset('assets/libs/node-waves/waves.min.js') }}"></script>
 
 
-<!-- apexcharts -->
-<script src="{{ asset('assets/libs/apexcharts/apexcharts.min.js') }}"></script>
+    <!-- apexcharts -->
+    <script src="{{ asset('assets/libs/apexcharts/apexcharts.min.js') }}"></script>
 
-<!-- jquery.vectormap map -->
-<script src="{{ asset('assets/libs/admin-resources/jquery.vectormap/jquery-jvectormap-1.2.2.min.js') }}"></script>
-<script src="{{ asset('assets/libs/admin-resources/jquery.vectormap/maps/jquery-jvectormap-us-merc-en.js') }}">
-</script>
+    <!-- jquery.vectormap map -->
+    <script src="{{ asset('assets/libs/admin-resources/jquery.vectormap/jquery-jvectormap-1.2.2.min.js') }}"></script>
+    <script src="{{ asset('assets/libs/admin-resources/jquery.vectormap/maps/jquery-jvectormap-us-merc-en.js') }}">
+    </script>
 
-<!-- Required datatable js -->
-<script src="{{ asset('assets/libs/datatables.net/js/jquery.dataTables.min.js') }}"></script>
-<script src="{{ asset('assets/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
+    <!-- Required datatable js -->
+    <script src="{{ asset('assets/libs/datatables.net/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('assets/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
 
-<!-- Responsive examples -->
-<script src="{{ asset('assets/libs/datatables.net-responsive/js/dataTables.responsive.min.js') }}"></script>
-<script src="{{ asset('assets/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js') }}"></script>
+    <!-- Responsive examples -->
+    <script src="{{ asset('assets/libs/datatables.net-responsive/js/dataTables.responsive.min.js') }}"></script>
+    <script src="{{ asset('assets/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js') }}"></script>
 
-<script src="{{ asset('assets/js/pages/dashboard.init.js') }}"></script>
+    <script src="{{ asset('assets/js/pages/dashboard.init.js') }}"></script>
 
-<script src="{{ asset('assets/libs/select2/js/select2.min.js') }}"></script>
+    <script src="{{ asset('assets/libs/select2/js/select2.min.js') }}"></script>
 
-<script src="{{ asset('assets/libs/spectrum-colorpicker2/spectrum.min.js') }}"></script>
+    <script src="{{ asset('assets/libs/spectrum-colorpicker2/spectrum.min.js') }}"></script>
 
-<script src="{{ asset('assets/libs/bootstrap-touchspin/jquery.bootstrap-touchspin.min.js') }}"></script>
+    <script src="{{ asset('assets/libs/bootstrap-touchspin/jquery.bootstrap-touchspin.min.js') }}"></script>
 
-<script src="{{ asset('assets/js/pages/form-advanced.init.js') }}"></script>
+    <script src="{{ asset('assets/js/pages/form-advanced.init.js') }}"></script>
 
-<!-- App js -->
-<script src="{{ asset('assets/js/app.js') }}"></script>
+    <!-- App js -->
+    <script src="{{ asset('assets/js/app.js') }}"></script>
 
-<script src="{{ asset('assets/js/img.js') }}"></script>
+    <script src="{{ asset('assets/js/img.js') }}"></script>
 
-<!-- Magnific Popup-->
-<script src="{{ asset('assets/libs/magnific-popup/jquery.magnific-popup.min.js') }}"></script>
+    <!-- Magnific Popup-->
+    <script src="{{ asset('assets/libs/magnific-popup/jquery.magnific-popup.min.js') }}"></script>
 
-<!-- lightbox init js-->
-<script src="{{ asset('assets/js/pages/lightbox.init.js') }}"></script>
+    <!-- lightbox init js-->
+    <script src="{{ asset('assets/js/pages/lightbox.init.js') }}"></script>
 
 
-<script>
+    <script>
         function myFunction() {
             if (!confirm("Ush bu elementni o'chirmoqchimisiz!"))
                 event.preventDefault();
@@ -202,12 +202,16 @@
             });
         });
 
+        document.getElementById('deleteForm').addEventListener('submit', function(event) {
+            event.preventDefault();
 
+            if (confirm('Haqiqatan ham ma\'lumotni o\'chirmoqchimisiz?')) {
+                this.submit();
+            }
+        });
+    </script>
 
-
-</script>
-
-@yield('js')
+    @yield('js')
 </body>
 
 </html>

@@ -66,6 +66,7 @@ class Group extends Model
             // ->where('finished_at', '=', null)
             // ->where('status', '=', GroupItem::STATUS_FINISHED)
             ->pluck('student_id');
+            
 
         return DB::table('users')
             ->where('user_type', '=', 4)

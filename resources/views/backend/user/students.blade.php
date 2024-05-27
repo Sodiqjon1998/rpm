@@ -37,7 +37,7 @@ $i = 1;
                                 <th>#</th>
                                 <th>Rasm</th>
                                 <th>Ism</th>
-                                <th>Guruhi</th>
+                                {{-- <th>Guruhi</th> --}}
                                 <th>Email</th>
                                 <th>Kiritilgan vaqti</th>
                                 <th>Action</th>
@@ -55,11 +55,11 @@ $i = 1;
                                     <td>
                                         {{ $user->name }}
                                     </td>
-                                    <td>
+                                    {{-- <td>
                                         <button class="btn btn-info btn-sm">
                                             {{ $user->groupName }}
                                         </button>
-                                    </td>
+                                    </td> --}}
                                     <td><?= $user->email ?></td>
                                     <td>{{ $user->created_at ?? '--' }}</td>
                                     <td style="width: 160px;">

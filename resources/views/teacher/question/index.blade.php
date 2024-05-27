@@ -581,13 +581,7 @@
                 }
             });
 
-            document.getElementById('deleteForm').addEventListener('submit', function (event) {
-                event.preventDefault();
-
-                if (confirm('Haqiqatan ham ma\'lumotni o\'chirmoqchimisiz?')) {
-                    this.submit();
-                }
-            });
+            
 
 
             $('select').selectpicker();

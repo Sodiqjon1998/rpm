@@ -133,10 +133,12 @@ class UserController extends Controller
         }
 
         
-
         $user->delete();
-        $deleteImage = Storage::disk('user')->delete($user->getOriginal('img'));
-        if ($user && $deleteImage) {
+        if($user->getOriginal('img') == null){
+            return redirect()->back()->with(['success' => 'Ma\'lumot muvaffaqiyatli o\'chirildi']);
+        }
+        else{
+            $deleteImage = Storage::disk('user')->delete($user->getOriginal('img'));
             return redirect()->back()->with(['success' => 'Ma\'lumot muvaffaqiyatli o\'chirildi']);
         }
 
@@ -148,10 +150,10 @@ class UserController extends Controller
 
 
         $students = User::findStudents()
-            ->rightJoin('group_item', 'users.id', '=', 'group_item.student_id')
-            ->leftJoin('groups', 'group_item.group_id', '=', 'groups.id')
-            ->where('group_item.finished_at', '=', null)
-            ->select(['users.id', 'users.img', 'users.name', 'users.email', 'users.created_at', 'groups.name as groupName'])
+            // ->rightJoin('group_item', 'users.id', '=', 'group_item.student_id')
+            // ->leftJoin('groups', 'group_item.group_id', '=', 'groups.id')
+            // ->where('group_item.finished_at', '=', null)
+            // ->select(['users.id', 'users.img', 'users.name', 'users.email', 'users.created_at', 'groups.name as groupName'])
             ->paginate(20);
 
         return view('backend.user.students', [
@@ -217,4 +219,5 @@ class UserController extends Controller
             'group_id' => $id
         ]);
     }
+
 }
