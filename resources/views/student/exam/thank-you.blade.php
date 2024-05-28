@@ -29,7 +29,7 @@ $allCount = count($attempts['examAnswers']);
                                 <tr>
                                     <td>
                                         {{ ++$key }}.
-                                        {{ QuestionItem::getQuestion($attempt->question_item_id)->question }}
+                                        {!! QuestionItem::getQuestion($attempt->question_item_id)->question !!}
                                         <img src="{{ asset('images/staticImages/shot.png') }}" width="25px" class="float-end"
                                             alt="">
                                     </td>

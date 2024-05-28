@@ -28,7 +28,7 @@
                     @foreach ($qnAnswers as $key => $question)
                         <div class="card">
                             <h5 class="card-header">
-                                Q.{{ $qcount++ }} {{ $question['questionItems'][0]['question'] }}
+                                Q.{{ $qcount++ }} {!! $question['questionItems'][0]['question'] !!}
                                 <img src="{{ asset('images/staticImages/shot.png') }}" width="30px" class="float-end"
                                     alt="">
                             </h5>

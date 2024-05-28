@@ -39,7 +39,8 @@ class QuestionItemController extends Controller
     {
         $questionItem = new QuestionItem();
 
-        $questionItem->question = $request->input('question');
+        $questionItem->question = $request->input('editor1');
+        
         $questionItem->created_by = Auth::user()->id;
         $questionItem->updated_by = Auth::user()->id;
 

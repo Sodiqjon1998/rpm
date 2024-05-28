@@ -195,7 +195,7 @@
     <script src="{{ asset('assets/js/img.js') }}"></script>
 
     <!--tinymce js-->
-    <script src="{{asset('assets/libs/tinymce/tinymce.min.js')}}"></script>
+    <script src="{{ asset('assets/libs/tinymce/tinymce.min.js') }}"></script>
 
     <!-- Magnific Popup-->
     <script src="{{ asset('assets/libs/magnific-popup/jquery.magnific-popup.min.js') }}"></script>
@@ -203,10 +203,12 @@
     <!-- lightbox init js-->
     <script src="{{ asset('assets/js/pages/lightbox.init.js') }}"></script>
 
-     <!-- init js -->
-     <script src="{{asset('assets/js/pages/form-editor.init.js')}}"></script>
+    <!-- init js -->
+    <script src="{{ asset('assets/js/pages/form-editor.init.js') }}"></script>
 
 
+    <script src="https://cdn.ckeditor.com/4.14.0/standard-all/ckeditor.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         function myFunction() {
             if (!confirm("Ush bu elementni o'chirmoqchimisiz!"))
@@ -220,6 +222,170 @@
                 });
             });
         });
+        (function() {
+            var mathElements = [
+                'math',
+                'maction',
+                'maligngroup',
+                'malignmark',
+                'menclose',
+                'merror',
+                'mfenced',
+                'mfrac',
+                'mglyph',
+                'mi',
+                'mlabeledtr',
+                'mlongdiv',
+                'mmultiscripts',
+                'mn',
+                'mo',
+                'mover',
+                'mpadded',
+                'mphantom',
+                'mroot',
+                'mrow',
+                'ms',
+                'mscarries',
+                'mscarry',
+                'msgroup',
+                'msline',
+                'mspace',
+                'msqrt',
+                'msrow',
+                'mstack',
+                'mstyle',
+                'msub',
+                'msup',
+                'msubsup',
+                'mtable',
+                'mtd',
+                'mtext',
+                'mtr',
+                'munder',
+                'munderover',
+                'semantics',
+                'annotation',
+                'annotation-xml'
+            ];
+            CKEDITOR.plugins.addExternal('ckeditor_wiris',
+                'https://ckeditor.com/docs/ckeditor4/4.14.0/examples/assets/plugins/ckeditor_wiris/', 'plugin.js');
+            CKEDITOR.replace('editor1', {
+                extraPlugins: 'ckeditor_wiris,print,format,font,colorbutton,justify,uploadimage,find,magicline,bidi,easyimage,image2,colordialog,tableresize',
+                mathJaxLib: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS_HTML',
+                format_tags: 'p;h1;h2;h3;h4;h5;h6;pre;address;div',
+                contentsLangDirection: 'ltr',
+                removeButtons: 'ExportPdf,Form,Checkbox,Radio,TextField,Select,Textarea,Button,ImageButton,HiddenField,NewPage,CreateDiv,Flash,Iframe,About,ShowBlocks,Maximize',
+                toolbarGroups: [{
+                        name: 'clipboard',
+                        groups: ['clipboard', 'undo']
+                    },
+                    {
+                        name: 'editing',
+                        groups: ['find', 'selection', 'spellchecker']
+                    },
+                    {
+                        name: 'links'
+                    },
+                    {
+                        name: 'insert'
+                    },
+                    {
+                        name: 'forms'
+                    },
+                    {
+                        name: 'tools'
+                    },
+                    {
+                        name: 'document',
+                        groups: ['mode', 'document', 'doctools']
+                    },
+                    {
+                        name: 'colors'
+                    },
+                    {
+                        name: 'others'
+                    },
+                    {
+                        name: 'about'
+                    },
+                    '/',
+                    {
+                        name: 'basicstyles',
+                        groups: ['basicstyles', 'cleanup']
+                    },
+                    {
+                        name: 'paragraph',
+                        groups: ['list', 'indent', 'blocks', 'align', 'bidi']
+                    },
+                    {
+                        name: 'styles'
+                    }
+                ],
+                removePlugins: 'uploadimage,uploadwidget,uploadfile,filetools,filebrowser',
+                removeDialogTabs: 'image:advanced;link:advanced',
+                height: 320,
+                extraAllowedContent: mathElements.join(' ') +
+                    '(*)[*]{*};img[data-mathml,data-custom-editor,role](Wirisformula);h3{clear};h2{line-height};h2 h3{margin-left,margin-top}; div{border,background,text-align}'
+            });
+            CKEDITOR.replace('editor2', {
+                extraPlugins: 'ckeditor_wiris,print,format,font,colorbutton,justify,uploadimage,find,magicline,bidi,easyimage,image2,colordialog,tableresize',
+                mathJaxLib: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS_HTML',
+                format_tags: 'p;h1;h2;h3;h4;h5;h6;pre;address;div',
+                contentsLangDirection: 'ltr',
+                removeButtons: 'ExportPdf,Form,Checkbox,Radio,TextField,Select,Textarea,Button,ImageButton,HiddenField,NewPage,CreateDiv,Flash,Iframe,About,ShowBlocks,Maximize',
+                toolbarGroups: [{
+                        name: 'clipboard',
+                        groups: ['clipboard', 'undo']
+                    },
+                    {
+                        name: 'editing',
+                        groups: ['find', 'selection', 'spellchecker']
+                    },
+                    {
+                        name: 'links'
+                    },
+                    {
+                        name: 'insert'
+                    },
+                    {
+                        name: 'forms'
+                    },
+                    {
+                        name: 'tools'
+                    },
+                    {
+                        name: 'document',
+                        groups: ['mode', 'document', 'doctools']
+                    },
+                    {
+                        name: 'colors'
+                    },
+                    {
+                        name: 'others'
+                    },
+                    {
+                        name: 'about'
+                    },
+                    '/',
+                    {
+                        name: 'basicstyles',
+                        groups: ['basicstyles', 'cleanup']
+                    },
+                    {
+                        name: 'paragraph',
+                        groups: ['list', 'indent', 'blocks', 'align', 'bidi']
+                    },
+                    {
+                        name: 'styles'
+                    }
+                ],
+                removePlugins: 'uploadimage,uploadwidget,uploadfile,filetools,filebrowser',
+                removeDialogTabs: 'image:advanced;link:advanced',
+                height: 320,
+                extraAllowedContent: mathElements.join(' ') +
+                    '(*)[*]{*};img[data-mathml,data-custom-editor,role](Wirisformula);h3{clear};h2{line-height};h2 h3{margin-left,margin-top}; div{border,background,text-align}'
+            });
+        }());
     </script>
 
     @yield('js')

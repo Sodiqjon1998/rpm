@@ -50,7 +50,7 @@
                                 @foreach ($questionItems as $key => $question)
                                     <tr style="padding: 0; margin:0;">
                                         <th scope="row" width="30" align="center"><?= ++$key ?></th>
-                                        <td>{{ $question->question }}</td>
+                                        <td>{!! $question->question !!}</td>
                                         <td>{{ $question->created_at }}</td>
                                         <td>{{ $question->updated_at }}</td>
                                         <td style="width: 150px;">
@@ -119,7 +119,11 @@
                             <div class="col">
                                 {{-- <input type="text" name="question" placeholder="Enter question" required id=""
                                        class="w-100 form-control-sm"> --}}
-                                       <textarea id="elm1" name="question" required ></textarea>
+                                       {{-- <textarea id="elm1" name="question" ></textarea> --}}
+                                       <textarea cols="10" id="editor1" name="editor1" rows="10" /*data-sample-short*/ required>
+                                        {{-- <p><math xmlns="http://www.w3.org/1998/Math/MathML"><mfrac><mn>2</mn><mn>5</mn></mfrac><mo>+</mo><mfrac><mn>3</mn><mn>5</mn></mfrac><mo>=</mo><mn>16</mn></math></p>
+                                        <p><math xmlns="http://www.w3.org/1998/Math/MathML" class="wrs_chemistry"><msub><mi mathvariant="normal">H</mi><mn>2</mn></msub><msub><mi>SO</mi><mn>4</mn></msub></math></p> --}}
+                                    </textarea>
                             </div>
                         </div>
                     </div>
@@ -152,8 +156,12 @@
                         <div class="row">
                             <div class="col">
                                 <input type="hidden" name="item_id" id="itemId">
-                                <input type="text" name="editQuestion" placeholder="Enter question" required id=""
-                                       class="w-100 form-control-sm question">
+                                {{-- <input type="text" name="editQuestion" placeholder="Enter question" required id=""
+                                       class="w-100 form-control-sm question"> --}}
+                                       <textarea cols="5" id="editor2" name="editQuestion" class="question" rows="5" /*data-sample-short*/ required>
+                                        {{-- <p><math xmlns="http://www.w3.org/1998/Math/MathML"><mfrac><mn>2</mn><mn>5</mn></mfrac><mo>+</mo><mfrac><mn>3</mn><mn>5</mn></mfrac><mo>=</mo><mn>16</mn></math></p>
+                                        <p><math xmlns="http://www.w3.org/1998/Math/MathML" class="wrs_chemistry"><msub><mi mathvariant="normal">H</mi><mn>2</mn></msub><msub><mi>SO</mi><mn>4</mn></msub></math></p> --}}
+                                    </textarea>
                             </div>
                         </div>
                     </div>
@@ -331,7 +339,7 @@
 
                         for(let j = 0; j < answerLength; j++){
 
-                            $("#exampleModalToggleLabel").text(questionItems[i]['question']);
+                            $("#exampleModalToggleLabel").html(questionItems[i]['question']);
 
                             let is_correct = "<i class='fa fa-times-circle btn btn-outline-danger'></i>";
 
@@ -373,7 +381,8 @@
                         let html = '';
                         let editAnswersLength = data.data.questionItems.answers.length;
 
-                        $('.question').val(data.data.questionItems.question);
+                        $('.question').val("Salom");
+                        // document.querySelector('.question').value = "Salom";
                         $('.editAnswers').remove();
 
                         for(let i = 0; i < editAnswersLength; i++){
