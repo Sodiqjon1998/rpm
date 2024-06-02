@@ -46,7 +46,7 @@ $i = 1;
                                         <th scope="row"><?= $i ?></th>
                                         <td>
                                             <img src="{{ !is_null($user->img) ? asset($user->img) : asset('images/staticImages/defaultAvatar.png') }}"
-                                                 width="80" height="70" alt="{{ asset($user->img) }}" class="rounded-circle">
+                                                 width="80" height="70" alt="{{ asset($user->img) }}" class="rounded-circle" style="border: 1px grey solid">
                                         </td>
                                         <td>
                                             {{ $user->name }}

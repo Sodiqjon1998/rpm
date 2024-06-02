@@ -2,5 +2,8 @@
 
 
 @section('content')
-    <h1>Backend</h1>
+    <h1 class="display-6 text-center">
+        Xush kelbisiz super admin bo'limiga! <br>
+        {{Auth::user()->name}}
+    </h1>
 @endsection
