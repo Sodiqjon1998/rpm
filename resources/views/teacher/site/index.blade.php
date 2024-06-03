@@ -2,5 +2,8 @@
 
 
 @section('content')
-    <h1>Teacher</h1>
+<h1 class="display-6 text-center">
+    Xush kelbisiz o'qtuvchi bo'limiga! <br>
+    {{Auth::user()->name}}
+</h1>
 @endsection

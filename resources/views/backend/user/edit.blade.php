@@ -8,12 +8,12 @@
         <div class="col-12">
             <nav aria-label="breadcrumb" style="display:flex; justify-content:space-between; align-items: center;">
                 <h3>
-                    Yangi qo'shish
+                    Tahrirlash
                 </h3>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('dashboard') }}"><i class="fa fa-home"></i></a></li>
                     <li class="breadcrumb-item"><a href="{{ route('backend.user.index') }}">Foydalanuchilar</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Yangi qo'shish</li>
+                    <li class="breadcrumb-item active" aria-current="page">Tahrirlash</li>
                 </ol>
             </nav>
         </div>

@@ -9,11 +9,11 @@ $i = 1;
         <div class="col-12" style="padding: 0 !important; margin: 0 !important; text-align:center;">
             <nav aria-label="breadcrumb" style="display:flex; justify-content:space-between; align-items: center;">
                 <h3 style="padding: 0 !important; margin: 0 !important; text-align:center;">
-                    Foydalanuvchilar
+                    O'qituvchilar
                 </h3>
                 <ol class="breadcrumb" style="padding: 0; margin:0 0 10px 0;">
                     <li class="breadcrumb-item"><a href="{{ route('dashboard') }}"><i class="fa fa-home"></i></a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Foydalanuvchilar</li>
+                    <li class="breadcrumb-item active" aria-current="page">O'qituvchilar</li>
                 </ol>
             </nav>
         </div>

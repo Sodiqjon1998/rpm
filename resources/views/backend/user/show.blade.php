@@ -16,7 +16,7 @@
                         </a>
                     </li>
                     <li class="breadcrumb-item">
-                        <a href="{{ route('backend.user.index') }}">Foydalanuvchilar</a>
+                        <a href="{{ route('backend.user.index') }}">O'qituvchilar</a>
                     </li>
                     <li class="breadcrumb-item active" aria-current="page">{{ $model->id }}</li>
                 </ol>
@@ -65,10 +65,6 @@
                     <tr>
                         <td>Type</td>
                         <td><?= User::getTypes($model->user_type) ?></td>
-                    </tr>
-                    <tr>
-                        <td>Status</td>
-                        <td><?= $model->status ?></td>
                     </tr>
                     <tr>
                         <td>Kiritilgan vaqti</td>

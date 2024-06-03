@@ -55,9 +55,9 @@
                     </a>
                 </li>
 
-                <li class="menu-title">Components</li>
+                {{-- <li class="menu-title">Components</li> --}}
 
-                <li>
+                {{-- <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
                         <i class="ri-pencil-ruler-2-line"></i>
                         <span>UI Elements</span>
@@ -65,7 +65,7 @@
                     <ul class="sub-menu" aria-expanded="false">
                         <li><a href="ui-alerts.html">Alerts</a></li>
                     </ul>
-                </li>
+                </li> --}}
 
 
             </ul>
