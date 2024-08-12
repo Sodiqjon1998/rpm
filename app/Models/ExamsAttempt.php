@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use DB;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -50,4 +51,16 @@ class ExamsAttempt extends Model
     public function answer(){
         return $this->hasOne(Answer::class, 'id', 'answer_id');
     }
+
+
+    /**
+     * get one User
+     */
+    public static function getStudent($id)
+    {
+        return DB::table('users')
+            ->where('id', '=', $id)
+            ->first();
+    }
+
 }

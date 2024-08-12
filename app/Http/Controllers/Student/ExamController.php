@@ -7,6 +7,7 @@ use App\Models\ExamsAnswer;
 use App\Models\ExamsAttempt;
 use App\Models\QnaExams;
 use App\Models\Teacher\Question;
+use DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -15,8 +16,18 @@ class ExamController extends Controller
 {
     public function index()
     {
-        $exams = Question::with('quiz')->orderBy('date', 'DESC')->get();
+        $exams = Question::with(['quiz', 'createdBy'])
+            ->orderBy('date', 'DESC')
+            // ->leftJoin('users', function ($join) {
+            //     $join->on('questions.created_by', '=', 'users.id');
+            // })
+            // ->leftJoin('group_item', function ($join) {
+            //     $join->on('users.id', '=', 'group_item.student_id');
+            // })
+            // ->where('group_item.student_id', '=', Auth::user()->id)
+            ->get();
 
+            dd($exams);
         return view('student.exam.index', [
             'exams' => $exams
         ]);
@@ -72,6 +83,8 @@ class ExamController extends Controller
         $attempt_id = ExamsAttempt::insertGetId([
             'exam_id' => $request->exam_id,
             'user_id' => Auth::user()->id,
+            'created_at' => date('Y-m-d'),
+            'updated_at' => date('Y-m-d'),
             'created_by' => Auth::user()->id,
             'updated_by' => Auth::user()->id,
         ]);
@@ -103,7 +116,7 @@ class ExamController extends Controller
             ->orderBy('exam_id', 'DESC')
             ->first();
 
-            // dd($attempts);
+        // dd($attempts);
 
         return view('student.exam.thank-you', [
             'attempts' => $attempts

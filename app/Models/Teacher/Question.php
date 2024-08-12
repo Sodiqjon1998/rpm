@@ -4,9 +4,11 @@ namespace App\Models\Teacher;
 
 use App\Models\ExamsAttempt;
 use App\Models\QnaExams;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 /**
  *
@@ -52,6 +54,11 @@ class Question extends \App\Models\Question
     public function quiz():BelongsTo
     {
         return $this->belongsTo(Quiz::class);
+    }
+
+    public function createdBy():HasOne
+    {
+        return $this->hasOne(User::class, 'id', 'created_by');
     }
 
     public function getQnaExam():HasMany

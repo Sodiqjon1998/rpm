@@ -1,4 +1,4 @@
-<header id="page-topbar" style="background: url({{asset('images/staticImages/backend/bg2.png')}});">
+<header id="page-topbar" style="background: url({{ asset('images/staticImages/backend/bg2.png') }});">
     <div class="navbar-header">
         <div class="d-flex">
             <!-- LOGO -->
@@ -12,7 +12,7 @@
                 <i class="ri-menu-2-line align-middle"></i>
             </button>
 
-            
+
         </div>
 
         <div class="d-flex">
@@ -23,15 +23,16 @@
                 </button>
             </div>
 
-          
+
 
             <div class="dropdown d-inline-block user-dropdown">
                 <button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown"
                     data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <img class="rounded-circle header-profile-user"
-                        src="{{!is_null(Auth::user()->img) ? asset(Auth::user()->img) : asset('images/staticImages/defaultAvatar.png') }}" alt="Header Avatar">
+                        src="{{ !is_null(Auth::user()->img) ? asset(Auth::user()->img) : asset('images/staticImages/defaultAvatar.png') }}"
+                        alt="Header Avatar">
                     <span class="d-none d-xl-inline-block ms-1">
-                        {{Auth::user()->name}}
+                        {{ Auth::user()->name }}
                     </span>
                     <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
                 </button>
@@ -53,12 +54,20 @@
                         <i class="ri-shut-down-line align-middle me-1 text-danger"></i>
                         <span class="align-middle">Chiqish</span>
                     </a>
-                    <form id="frm-logout" action="{{ route('teacher.logout') }}" method="POST"
-                        style="display: none;">
+                    <form id="frm-logout" action="{{ route('teacher.logout') }}" method="POST" style="display: none;">
                         {{ csrf_field() }}
                     </form>
                 </div>
             </div>
+
+            <a class="dropdown-item text-danger" href="{{ route('teacher.logout') }}"
+                onclick="event.preventDefault(); document.getElementById('frm-logout').submit();">
+                <i class="ri-shut-down-line align-middle me-1 text-danger"></i>
+                <span class="align-middle">Chiqish</span>
+            </a>
+            <form id="frm-logout" action="{{ route('teacher.logout') }}" method="POST" style="display: none;">
+                {{ csrf_field() }}
+            </form>
 
             <div class="dropdown d-inline-block">
                 <button type="button" class="btn header-item noti-icon right-bar-toggle waves-effect">
