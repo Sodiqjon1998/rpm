@@ -90,6 +90,7 @@ class QuestionItemController extends Controller
      */
     public function update(Request $request)
     {
+        
         try {
             $questionItemsId = $request->input('item_id');
 
@@ -131,6 +132,7 @@ class QuestionItemController extends Controller
 
                     }
 
+
                     Answer::insert([
                         'item_id' => $questionItemsId,
                         'answer' => $value,
@@ -164,7 +166,7 @@ class QuestionItemController extends Controller
     public function getData($id)
     {
 
-        $questionItems = QuestionItem::with('answers')->where('id', $id)->first();
+        $questionItems = QuestionItem::with('   answers')->where('id', $id)->first();
 
         if ($questionItems) {
 
